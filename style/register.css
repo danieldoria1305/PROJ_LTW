@@ -1,0 +1,74 @@
+main {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    max-width: 500px;
+}
+  
+main h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #0077b6;
+}
+  
+form {
+    display: flex;
+    flex-direction: column;
+}
+  
+label {
+    font-size: 17px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #0077b6;
+}
+  
+input {
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 400px;
+    transition: border-color 0.3s ease;
+}
+ 
+input:focus {
+    outline: none;
+    border-color: #0077b6;
+}
+  
+.radio-group {
+    display: flex;
+    flex-direction: row;
+    color: #0077b6;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+  
+.radio-group input[type="radio"] {
+    margin-top: 4px;
+}
+
+button[type="submit"] {
+    font-size: 18px;
+    background-color: #0077b6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+}
+  
+button[type="submit"]:hover {
+    background-color: #0077b6;
+}

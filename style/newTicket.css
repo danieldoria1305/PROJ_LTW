@@ -1,0 +1,94 @@
+main {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    max-width: 900px;
+}
+  
+main h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #0077b6;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+  
+form label {
+    font-size: 17px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #0077b6;
+}
+
+form input[type="text"], form textarea {
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: auto;
+    transition: border-color 0.3s ease;
+}
+  
+form textarea {
+    resize: none;
+    height: 200px;
+    align-items: center;
+}
+  
+form select {
+    width: 25%;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+form select[id="department"] {
+    margin-right: 50px;
+}
+  
+form button {
+    font-size: 18px;
+    background-color: #0077b6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+}
+  
+form button:hover {
+    background-color: #0077b6;
+}
+  
+/* error message */
+.error {
+    color: #c0392b;
+    margin-top: 10px;
+}
+  
+/* success message */
+.success {
+    color: #27ae60;
+    margin-top: 10px;
+}
+  
