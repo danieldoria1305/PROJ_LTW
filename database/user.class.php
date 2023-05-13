@@ -122,7 +122,7 @@ class User {
         } catch(PDOException $e) return -1;
     
     }*/
-    /*
+    
     function createUser(PDO $db, $username, $password, $name, $email) {
         $stmt = $db->prepare('
             INSERT INTO User (Name, Username, Password, Email)
@@ -154,4 +154,4 @@ class User {
             return true;
         }
     }
-    */
+
