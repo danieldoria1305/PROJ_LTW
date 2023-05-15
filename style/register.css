@@ -72,3 +72,26 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #0077b6;
 }
+
+.error {
+  font-size: 14px;
+  color: red;
+  margin-top: -18px;
+  margin-bottom: 5px;
+}
+
+.NoAccount {
+    color: #808080;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 70%;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.NoAccount a{
+    color: #4f4f4f;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: larger;
+}
