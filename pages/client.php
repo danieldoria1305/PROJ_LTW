@@ -1,3 +1,11 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../pages/index.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +20,7 @@
             <nav>
                 <ul>
                     <li><a href="myPage.php">My Page</a></li>
-                    <li><a href="index.php">Log out</a></li>
+                    <li><a href="../actions/action_logout.php">Log out</a></li>
                 </ul>
             </nav>
         </header>

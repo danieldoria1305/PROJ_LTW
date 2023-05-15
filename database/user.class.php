@@ -125,7 +125,7 @@ class User {
     
     function createUser(PDO $db, $username, $password, $name, $email) {
         $stmt = $db->prepare('
-            INSERT INTO User (Name, Username, Password, Email)
+            INSERT INTO users (Name, Username, Password, Email)
             VALUES (?, ?, ?, ?)
         ');
 
@@ -133,9 +133,9 @@ class User {
         return (int)$db->lastInsertId();
     }
 
-    function duplicateUsername($db, $username) {
+    function duplicateUsername(PDO $db, $username) {
         try {
-            $stmt = $db->prepare('SELECT ID FROM User WHERE username = ?');
+            $stmt = $db->prepare('SELECT id FROM users WHERE username = ?');
             $stmt->execute(array($username));
             return $stmt->fetch()  !== false;
         
@@ -144,9 +144,9 @@ class User {
         }
     }
 
-    function duplicateEmail($db, $email) {
+    function duplicateEmail(PDO $db, $email) {
         try {
-            $stmt = $db->prepare('SELECT ID FROM User WHERE email = ?');
+            $stmt = $db->prepare('SELECT ID FROM users WHERE email = ?');
             $stmt->execute(array($email));
             return $stmt->fetch()  !== false;
         

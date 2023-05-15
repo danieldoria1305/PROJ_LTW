@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+require_once '../database/connection.db.php';
+require_once '../database/user.class.php';
+
 // Redirect to homepage if user is already logged in
 
 if (isset($session->username)) {
@@ -23,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // validate data
     $name_error = $username_error = $email_error = $password_error = "";
-    $error = false;
+    $has_error = false;
 
     // name validation
     if (empty($name)) {
@@ -52,37 +55,36 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // password validation
-    if (empty($email)) {
+    if (empty($password)) {
         $email_error = "Please enter a password";
         $has_error = true;
     } elseif (strlen($password) < 6 or strlen($password) > 15) {
         $password_error = "Password must be between 6 and 15 characters long";
         $has_error = true;
-    } elseif (!preg_match("/[A-Z]/", $password) || !preg_match("/[a-z]/", $password) || !preg_match("/[0-9]/", $password) || !preg_match("/[a-zA-Z0-9]/", $password)) {
-        $password_error = "Please enter valid characters";
-        $has_error = true;
     }
 
     // repeated data 
     if (!$has_error) {
-        require_once '../database/database.php';
-        require_once '../database/user.class.php';
         $db = getDatabaseConnection();
-    
-        if (User::duplicateUsername($db, $username)) {
+
+        if (duplicateUsername($db, $username)) {
             $username_error = "Username already exists";
             $has_error = true;
+            error_log('ssss');
         }
 
-        if(User::duplicateEmail($db, $email)) {
+        if(duplicateEmail($db, $email)) {
             $email_error = "Email already in use";
             $has_error = true;
+        error_log('ssss');
+
         }
     }
-
     // nothing has errors
     if (!$has_error) {
-        $UserID = User::createUser($db, $name, $username, $email, $password);
+        $UserID = createUser($db, $username, $password, $name, $email);
+        $_SESSION['userID'] = $UserID;
+        header('Location: ../pages/client.php');
     } else {
         $username_error = "Error...";
         $has_error = true;
