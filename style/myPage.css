@@ -56,3 +56,30 @@ input[type="submit"]:hover {
     background-color: #0077b6;
 }
   
+.error {
+  font-size: 14px;
+  color: red;
+  margin-top: -18px;
+  margin-bottom: 5px;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field input[type="password"] {
+    padding-right: 35px;
+}
+
+.password-field button {
+    position: absolute;
+    top: 33%;
+    right: 7px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #0077b6;
+    padding: 0;
+}

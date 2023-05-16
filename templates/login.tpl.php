@@ -26,14 +26,15 @@
                 <?php endif; ?>
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <div class="password-field">
+                    <input type="password" id="password" name="password" required>
+                    <button id="password-toggle" type="button">Show</button>
+                </div>
                 <?php if (!empty($password_error)) : ?>
                     <div class="error"><?php echo $password_error; ?></div>
                 <?php endif; ?>
 
                 <button type="submit">Submit</button>
-
-                <!--<p>Forgot your password? <a href="reset_password.php">Reset it</a></p>!-->
 
                 <div class="NoAccount">
                     <p>Don't have an account? <a href="register.php">Register</a></p>
@@ -43,6 +44,22 @@
         </main>
 
         <?php include '../templates/footer.tpl.php';?>
+
+        <script>
+            const passwordField = document.getElementById('password');
+            const passwordToggle = document.getElementById('password-toggle');
+
+            passwordToggle.addEventListener('click', () => {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    passwordToggle.textContent = 'Hide';
+                } else {
+                    passwordField.type = 'password';
+                    passwordToggle.textContent = 'Show';
+                }
+            });
+        </script>
+        
     </body>
     </html>
 <?php } ?>

@@ -7,6 +7,7 @@
     require_once '../utils/session.php';
 
     $session = new Session();
+    $session->init();
 
     if (isset($session->username)) {
         header("Location: ../pages/client.php");
@@ -47,6 +48,9 @@
                 $has_error = true;
             } else {
                 $_SESSION['userID'] = $user->id;
+                $_SESSION['username'] = $user->username;
+                $session->setId($user->id);
+                $session->setUsername($user->username);
                 header('Location: ../pages/client.php');
             }
         }

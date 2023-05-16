@@ -34,7 +34,10 @@
                 <?php endif; ?>
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <div class="password-field">
+                    <input type="password" id="password" name="password" required>
+                    <button id="password-toggle" type="button">Show</button>
+                </div>
                 <?php if (!empty($password_error)) : ?>
                     <div class="error"><?php echo $password_error; ?></div>
                 <?php endif; ?>
@@ -44,6 +47,22 @@
         </main>
 
         <?php include '../templates/footer.tpl.php';?>
+
+        <script>
+            const passwordField = document.getElementById('password');
+            const passwordToggle = document.getElementById('password-toggle');
+
+            passwordToggle.addEventListener('click', () => {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    passwordToggle.textContent = 'Hide';
+                } else {
+                    passwordField.type = 'password';
+                    passwordToggle.textContent = 'Show';
+                }
+            });
+        </script>
+        
     </body>
     </html>
 <?php } ?>

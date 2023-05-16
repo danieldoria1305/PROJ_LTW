@@ -57,8 +57,8 @@
                 <button type="submit">Delete</button>
             </form>
         </main>
-
         <?php include '../templates/footer.tpl.php';?>
     </body>
     </html>
+    
 <?php } ?>

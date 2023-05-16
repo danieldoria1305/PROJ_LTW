@@ -111,4 +111,35 @@
         return null;
     }
 
+    function updateUser(PDO $db, int $id, string $username, string $password, string $name, string $email): bool {
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $db->prepare('
+            UPDATE users
+            SET username = ?, password = ?, email = ?, name = ?
+            WHERE id = ?
+        ');
+
+        return $stmt->execute(array($username, $password_hash, $email, $name, $id));
+    }
+
+    function getUserData(PDO $db, int $userId): ?User {
+        $stmt = $db->prepare('SELECT * FROM users WHERE id = ?');
+        $stmt->execute([$userId]);
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return new User(
+                (int) $row['id'],
+                $row['username'],
+                $row['password'],
+                $row['email'],
+                $row['name'],
+                $row['role']
+            );
+        }
+
+        return null;
+    }
+
+
 ?>
