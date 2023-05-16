@@ -9,34 +9,27 @@
 
     $session = new Session();
 
-    // Redirect to homepage if user is already logged in
     if (isset($session->username)) {
         header("Location: ../pages/client.php");
         exit();
     }
 
-    // Initialize error messages
     $name_error = $username_error = $email_error = $password_error = '';
 
-    // Process registration form submission
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-        // Get form data
         $name = trim($_POST["name"]);
         $username = trim($_POST["username"]);
         $email = trim($_POST["email"]);
         $password = trim($_POST["password"]);
 
-        // validate data
         $has_error = false;
 
-        // name validation
         if (empty($name)) {
             $name_error = "Please enter your name!";
             $has_error = true;
         }
 
-        // username validation
         if (empty($username)) {
             $username_error = "Please enter a username!";
             $has_error = true;
@@ -48,7 +41,6 @@
             $has_error = true;
         }
 
-        // email validation
         if (empty($email)) {
             $email_error = "Please enter an email!";
             $has_error = true;
@@ -57,7 +49,6 @@
             $has_error = true;
         }
 
-        // password validation
         if (empty($password)) {
             $password_error = "Please enter a password!";
             $has_error = true;
@@ -66,23 +57,22 @@
             $has_error = true;
         }
 
-        // repeated data
         if (!$has_error) {
             $db = getDatabaseConnection();
 
-            if (User::duplicateUsername($db, $username)) {
+            if (duplicateUsername($db, $username)) {
                 $username_error = "Username already exists!";
                 $has_error = true;
             }
 
-            if (User::duplicateEmail($db, $email)) {
+            if (duplicateEmail($db, $email)) {
                 $email_error = "Email already in use!";
                 $has_error = true;
             }
         }
 
         if (!$has_error) {
-            $UserID = User::createUser($db, $username, $password, $name, $email);
+            $UserID = createUser($db, $username, $password, $name, $email);
             $_SESSION['userID'] = $UserID;
             header('Location: ../pages/client.php');
         } else {
@@ -90,7 +80,6 @@
         }
     }
 
-    // Display registration form with errors (if any)
     else include_once '../templates/register.tpl.php';
 
 ?>

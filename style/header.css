@@ -28,6 +28,11 @@ header h1 {
     letter-spacing: 1px;
 }
 
+header h1 a {
+    color: #fff;
+    text-decoration: none;
+}
+
 header nav ul {
     display: flex;
     list-style-type: none;

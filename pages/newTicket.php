@@ -7,11 +7,11 @@
     </head>
     <body>
         <header>
-            <h1>Ticketly <span class="smaller">New Ticket</span></h1>
+            <h1><a href="../pages/index.php"> Ticketly</a> <span class="smaller">New Ticket</span></h1>
             <nav>
                 <ul>
                     <li><a href="client.php">Back to My Tickets</a></li>
-                    <li><a href="index.php">Log out</a></li>
+                    <li><a href="../actions/action_logout.php">Log out</a></li>
                 </ul>
             </nav>
         </header>

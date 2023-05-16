@@ -8,23 +8,18 @@
 
     $session = new Session();
 
-    // Redirect to homepage if user is already logged in
     if (isset($session->username)) {
         header("Location: ../pages/client.php");
         exit();
     }
 
-    // Initialize error messages
     $username_error = $email_error = $password_error = '';
 
-    // Process login form submission
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-        // Get form data
         $username_or_email = trim($_POST["username"]);
         $password = trim($_POST["password"]);
 
-        // Validate form data
         $has_error = false;
 
         if (empty($username_or_email)) {
@@ -40,15 +35,14 @@
         if (!$has_error) {
             $db = getDatabaseConnection();
 
-            // Check if the input is an email or username and fetch the user data
             $user = filter_var($username_or_email, FILTER_VALIDATE_EMAIL)
-                ? User::getUserByEmail($db, $username_or_email)
-                : User::getUserByUsername($db, $username_or_email);
+                ? getUserByEmail($db, $username_or_email)
+                : getUserByUsername($db, $username_or_email);
 
             if (!$user) {
                 $username_error = "User not found!";
                 $has_error = true;
-            } elseif (!$user->getUserWithPassword($db, $user->username, $password)) {
+            } elseif (!getUserWithPassword($db, $user->username, $password)) {
                 $password_error = "Incorrect password!";
                 $has_error = true;
             } else {
@@ -63,7 +57,6 @@
         }
     }
 
-    // Display login form with errors (if any)
     else require_once '../templates/login.tpl.php';
 
 ?>

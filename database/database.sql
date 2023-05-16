@@ -51,11 +51,7 @@ CREATE TABLE tickets (
 CREATE TABLE faqs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     question TEXT NOT NULL,
-    answer TEXT NOT NULL,
-    created_at DATETIME NOT NULL,
-    updated_at DATETIME NOT NULL,
-    user_id INTEGER,
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    answer TEXT NOT NULL
 );
 
 CREATE TABLE ticket_hashtags (
