@@ -16,10 +16,11 @@
     </head>
     <body>
         <header>
-            <h1><a href="../pages/index.php"> Ticketly</a> <span class="smaller">Client Area</span></h1>
+            <h1>Ticketly <span class="smaller">Client Area</span></h1>
             <nav>
                 <ul>
                     <li><a href="myPage.php">My Page</a></li>
+                    <li><a href="faq.php">FAQ</a></li>
                     <li><a href="../actions/action_logout.php">Log out</a></li>
                 </ul>
             </nav>

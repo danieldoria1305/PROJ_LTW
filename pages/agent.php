@@ -12,6 +12,7 @@
             <nav>
                 <ul>
                     <li><a href="myPage.php">My Page</a></li>
+                    <li><a href="faq.php">FAQ</a></li>
                     <li><a href="index.php">Log out</a></li>
                 </ul>
             </nav>

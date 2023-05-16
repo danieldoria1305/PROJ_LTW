@@ -76,7 +76,7 @@
             $_SESSION['userID'] = $UserID;
             header('Location: ../pages/client.php');
         } else {
-            drawRegister($session, $name_error, $username_error, $email_error, $password_error, $error_message);
+            drawRegister($session, $name_error, $username_error, $email_error, $password_error);
         }
     }
 
