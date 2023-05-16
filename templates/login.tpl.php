@@ -20,8 +20,8 @@
                 <?php if (!empty($username_error) or !empty($email_error)) : ?>
                     <div class="error">
                         <?php 
-                            echo $username_error; 
-                            echo $email_error;
+                            echo htmlspecialchars($username_error); 
+                            echo htmlspecialchars($email_error);
                         ?></div>
                 <?php endif; ?>
 
@@ -31,7 +31,7 @@
                     <button id="password-toggle" type="button">Show</button>
                 </div>
                 <?php if (!empty($password_error)) : ?>
-                    <div class="error"><?php echo $password_error; ?></div>
+                    <div class="error"><?php echo htmlspecialchars($password_error); ?></div>
                 <?php endif; ?>
 
                 <button type="submit">Submit</button>
@@ -45,20 +45,7 @@
 
         <?php include '../templates/footer.tpl.php';?>
 
-        <script>
-            const passwordField = document.getElementById('password');
-            const passwordToggle = document.getElementById('password-toggle');
-
-            passwordToggle.addEventListener('click', () => {
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    passwordToggle.textContent = 'Hide';
-                } else {
-                    passwordField.type = 'password';
-                    passwordToggle.textContent = 'Show';
-                }
-            });
-        </script>
+        <script src="../javascript/passwordToggle.js"></script>
         
     </body>
     </html>

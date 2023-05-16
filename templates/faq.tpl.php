@@ -30,8 +30,8 @@
                 <ul>
                     <?php foreach ($faqs as $faq) : ?>
                         <li>
-                            <h4><?php echo $faq->question; ?></h4>
-                            <p><?php echo $faq->answer; ?></p>
+                            <h4><?php echo htmlspecialchars($faq->question); ?></h4>
+                            <p><?php echo htmlspecialchars($faq->answer); ?></p>
                             <a href="editFaq.php?id=<?php echo $faq->id; ?>" class="edit-button">Edit</a>
                         </li>
                     <?php endforeach; ?>
@@ -45,6 +45,4 @@
     </body>
     </html>
 
-<?php
-}
-?>
+<?php } ?>

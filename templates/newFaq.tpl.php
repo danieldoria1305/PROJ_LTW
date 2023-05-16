@@ -21,13 +21,13 @@
                 <label for="question">Question:</label>
                 <textarea type="text" id="question" name="question" required></textarea>
                 <?php if (!empty($question_error)) : ?>
-                    <div class="error"><?php echo $question_error; ?></div>
+                    <div class="error"><?php echo htmlspecialchars($question_error); ?></div>
                 <?php endif; ?>
                 
                 <label for="answer">Answer:</label>
                 <textarea type="text" id="answer" name="answer" required></textarea>
                 <?php if (!empty($answer_error)) : ?>
-                    <div class="error"><?php echo $answer_error; ?></div>
+                    <div class="error"><?php echo htmlspecialchars($answer_error); ?></div>
                 <?php endif; ?>
 
                 <button type="submit">Create</button>

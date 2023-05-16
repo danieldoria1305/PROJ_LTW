@@ -43,19 +43,19 @@
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" value="<?php echo $user->name; ?>" required>
                     <?php if (!empty($name_error)) : ?>
-                        <div class="error"><?php echo $name_error; ?></div>
+                        <div class="error"><?php echo htmlspecialchars($name_error); ?></div>
                     <?php endif; ?>
 
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" value="<?php echo $user->username; ?>" required>
                     <?php if (!empty($username_error)) : ?>
-                        <div class="error"><?php echo $username_error; ?></div>
+                        <div class="error"><?php echo htmlspecialchars($username_error); ?></div>
                     <?php endif; ?>
 
                     <label for="email">E-mail:</label>
                     <input type="email" id="email" name="email" value="<?php echo $user->email; ?>" required>
                     <?php if (!empty($email_error)) : ?>
-                        <div class="error"><?php echo $email_error; ?></div>
+                        <div class="error"><?php echo htmlspecialchars($email_error); ?></div>
                     <?php endif; ?>
 
                     <label for="password">Password:</label>
@@ -64,7 +64,7 @@
                         <button id="password-toggle" type="button">Show</button>
                     </div>
                     <?php if (!empty($password_error)) : ?>
-                        <div class="error"><?php echo $password_error; ?></div>
+                        <div class="error"><?php echo htmlspecialchars($password_error); ?></div>
                     <?php endif; ?>
 
                     <input type="submit" value="Save Changes">
@@ -74,20 +74,8 @@
 
         <?php include '../templates/footer.tpl.php'; ?>
 
-        <script>
-            const passwordField = document.getElementById('password');
-            const passwordToggle = document.getElementById('password-toggle');
+        <script src="../javascript/passwordToggle.js"></script>
 
-            passwordToggle.addEventListener('click', () => {
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    passwordToggle.textContent = 'Hide';
-                } else {
-                    passwordField.type = 'password';
-                    passwordToggle.textContent = 'Show';
-                }
-            });
-        </script>
     </body>
     </html>
 

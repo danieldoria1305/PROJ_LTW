@@ -75,6 +75,10 @@
         if (!$has_error) {
             $UserID = createUser($db, $username, $password, $name, $email);
             $_SESSION['userID'] = $UserID;
+            $user = getUserByID($db, $UserID);
+            $_SESSION['username'] = $user->username;
+            $session->setId($user->id);
+            $session->setUsername($user->username);
             header('Location: ../pages/client.php');
         } else {
             drawRegister($session, $name_error, $username_error, $email_error, $password_error);

@@ -32,6 +32,25 @@
         return (int)$db->lastInsertId();
     }
 
+    function getUserById(PDO $db, int $id): ?User {
+        $stmt = $db->prepare('SELECT * FROM users WHERE id = ?');
+        $stmt->execute([$id]);
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return new User(
+                (int) $row['id'],
+                $row['username'],
+                $row['password'],
+                $row['email'],
+                $row['name'],
+                $row['role']
+            );
+        }
+
+        return null;
+    }
+    
     function duplicateUsername(PDO $db, $username) {
         try {
             $stmt = $db->prepare('SELECT id FROM users WHERE username = ?');

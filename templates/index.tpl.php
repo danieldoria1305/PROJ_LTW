@@ -1,13 +1,14 @@
 <?php function drawIndex(Session $session){
     require_once '../database/connection.db.php';
     require_once '../database/faqs.class.php';
-    
+
     $db = getDatabaseConnection();
     $faqs = getFaqData($db);
     ?>
-    
+
     <!DOCTYPE html>
     <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +16,9 @@
         <link rel="stylesheet" href="../style/index.css">
         <link rel="stylesheet" href="../style/header.css">
     </head>
+
     <body>
-                <header>
+        <header>
             <h1>Ticketly</h1>
             <nav>
                 <ul>
@@ -35,17 +37,15 @@
                 <ul>
                     <?php foreach ($faqs as $faq) : ?>
                         <li>
-                            <h4><?php echo $faq->question; ?></h4>
-                            <p><?php echo $faq->answer; ?></p>
+                            <h4><?php echo htmlspecialchars($faq->question); ?></h4>
+                            <p><?php echo htmlspecialchars($faq->answer); ?></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             </section>
         </main>
-        <?php include '../templates/footer.tpl.php';?>
+        <?php include '../templates/footer.tpl.php'; ?>
     </body>
-    </html>
 
-<?php
-}
-?>
+    </html>
+<?php } ?>
