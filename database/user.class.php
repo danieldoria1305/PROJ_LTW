@@ -9,14 +9,16 @@
         public string $email;
         public string $name;
         public string $role;
+        public int $departmentId;
 
-        public function __construct(?int $id, string $username, string $password, string $email, string $name, string $role) {
+        public function __construct(?int $id, string $username, string $password, string $email, string $name, string $role, int $departmentId = 1) {
             $this->id = $id;
             $this->username = $username;
             $this->password = $password;
             $this->email = $email;
             $this->name = $name;
             $this->role = $role;
+            $this->departmentId = $departmentId;
         }
 
     }
@@ -141,6 +143,16 @@
         return $stmt->execute(array($username, $password_hash, $email, $name, $id));
     }
 
+    function updateUserRole(PDO $db, int $id, string $role): bool {
+        $stmt = $db->prepare('
+            UPDATE users
+            SET role = ?
+            WHERE id = ?
+        ');
+
+        return $stmt->execute(array($role, $id));
+    }
+
     function getUserData(PDO $db, int $userId): ?User {
         $stmt = $db->prepare('SELECT * FROM users WHERE id = ?');
         $stmt->execute([$userId]);
@@ -160,5 +172,53 @@
         return null;
     }
 
+    function getClients(PDO $db): array {
+        $stmt = $db->prepare('SELECT * FROM users WHERE role = ?');
+        $stmt->execute(['client']);
+
+        $clients = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $clients[] = new User(
+                (int) $row['id'],
+                $row['username'],
+                $row['password'],
+                $row['email'],
+                $row['name'],
+                $row['role']
+            );
+        }
+
+        return $clients;
+    }
+
+    function getAgents(PDO $db): array {
+        $stmt = $db->prepare('SELECT * FROM users WHERE role = ?');
+        $stmt->execute(['agent']);
+
+        $agents = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $agents[] = new User(
+                (int) $row['id'],
+                $row['username'],
+                $row['password'],
+                $row['email'],
+                $row['name'],
+                $row['role'],
+                (int) $row['department_id']
+            );
+        }
+
+        return $agents;
+    }
+
+    function updateUserDepartment(PDO $db, int $id, int $departmentId): bool {
+        $stmt = $db->prepare('
+            UPDATE users
+            SET department_id = ?
+            WHERE id = ?
+        ');
+
+        return $stmt->execute([$departmentId, $id]);
+    }
 
 ?>

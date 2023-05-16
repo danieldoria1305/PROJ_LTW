@@ -20,6 +20,8 @@
             <nav>
                 <ul>
                     <li><a href="myPage.php">My Page</a></li>
+                    <li><a href="listClients.php">Clients' List</a></li>
+                    <li><a href="listAgents.php">Agents' List</a></li>
                     <li><a href="faq.php">FAQ</a></li>
                     <li><a href="../actions/action_logout.php">Log out</a></li>
                 </ul>
