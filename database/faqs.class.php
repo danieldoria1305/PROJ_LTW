@@ -62,4 +62,10 @@
         return $stmt->execute();
     }
 
+    function deleteFaq(PDO $db, ?int $faqId): bool {
+        $stmt = $db->prepare('DELETE FROM faqs WHERE id = :faqId');
+        $stmt->bindValue(':faqId', $faqId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
 ?>

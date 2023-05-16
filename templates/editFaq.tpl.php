@@ -50,8 +50,11 @@
                 <?php if (!empty($answer_error)) : ?>
                     <div class="error"><?php echo $answer_error; ?></div>
                 <?php endif; ?>
-
                 <button type="submit">Update</button>
+            </form>
+            <form id="delete-form" action="../actions/action_deleteFaq.php" method="post">
+                <input type="hidden" name="faq_id" value="<?php echo $faq->id; ?>">
+                <button type="submit">Delete</button>
             </form>
         </main>
 
