@@ -20,7 +20,8 @@
         
         $question = trim($_POST["question"]);
         $answer = trim($_POST["answer"]);
-        $faqId = isset($_POST["faq_id"]) ? (int)$_POST["faq_id"] : isset($_GET['id']) ? (int)$_GET['id'] : null;
+        $faqId = isset($_POST["faq_id"]) ? (int)$_POST["faq_id"] : (isset($_GET['id']) ? (int)$_GET['id'] : null);
+
 
         $has_error = false;
 
@@ -42,11 +43,9 @@
 
         if (!$has_error) {
             $db = getDatabaseConnection();
-            $success = editFaq($db, (int)$faqId, $question, $answer);
-            if ($success) {
-                header('Location: ../pages/faq.php');
-                exit();
-            } 
+            $faqId = editFaq($db, $faqId, $question, $answer);
+            header('Location: ../pages/faq.php');
+            exit();
         }
     }
 

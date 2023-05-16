@@ -4,7 +4,9 @@
     
     $db = getDatabaseConnection();
     
-    if (isset($_GET['id'])) {
+    if (isset($_POST['faq_id'])) {
+        $faqId = (int)$_POST['faq_id'];
+    } elseif (isset($_GET['id'])) {
         $faqId = (int)$_GET['id'];
     } else {
         exit('Invalid FAQ ID');
@@ -36,7 +38,7 @@
         <main>
             <h2>Edit FAQ</h2>
             <form id="faq-form" action="../actions/action_editFaq.php" method="post">
-                <input type="hidden" name="faq_id" value="<?php echo htmlspecialchars($faqId); ?>">
+                <input type="hidden" name="faq_id" value="<?php echo $faq->id; ?>">
                 <label for="question">Question:</label>
                 <textarea type="text" id="question" name="question" required><?php echo $faq->question; ?></textarea>
                 <?php if (!empty($question_error)) : ?>

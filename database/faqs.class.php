@@ -51,15 +51,15 @@
         $id = isset($row['id']) ? (int) $row['id'] : null;
         $question = isset($row['question']) ? $row['question'] : '';
         $answer = isset($row['answer']) ? $row['answer'] : '';
-
-        $faq = new Faqs($id, $question, $answer);
-        return $faq;
+        return new Faqs($id, $question, $answer);
     }
 
     function editFaq(PDO $db, ?int $faqId, string $question, string $answer): bool {
-        $stmt = $db->prepare('UPDATE faqs SET question = ?, answer = ? WHERE id = ?');
-        $stmt->execute([$question, $answer, $faqId]);
-        return $stmt->rowCount() > 0;
+        $stmt = $db->prepare('UPDATE faqs SET question = :question, answer = :answer WHERE id = :faqId');
+        $stmt->bindValue(':question', $question, PDO::PARAM_STR);
+        $stmt->bindValue(':answer', $answer, PDO::PARAM_STR);
+        $stmt->bindValue(':faqId', $faqId, PDO::PARAM_INT);
+        return $stmt->execute();
     }
 
 ?>
