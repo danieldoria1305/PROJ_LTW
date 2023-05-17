@@ -11,19 +11,19 @@
         public string $description;
         private int $clientId;
         private int $agentId;
-        private string $status;
+        private int $statusId;
         private string $priority;
         private $createdAt;
         private $updatedAt;
         public int $departmentId;
 
-        public function __construct(int $id, string $title, string $description, int $clientId, int $agentId, string $status = 'open', string $priority = 'medium', int $departmentId) {
+        public function __construct(?int $id, string $title, string $description, int $clientId, int $agentId, int $statusId = 1, string $priority = 'medium', ?int $departmentId) {
             $this->id = $id;
             $this->title = $title;
             $this->description = $description;
             $this->clientId = $clientId;
             $this->agentId = $agentId;
-            $this->status = $status;
+            $this->statusId = $statusId;
             $this->priority = $priority;
             $this->createdAt = date('Y-m-d H:i:s');
             $this->updatedAt = $this->createdAt;
@@ -63,12 +63,14 @@
 
     }
 
-    function createTicket(PDO $db, $title, $description, $clientId, $departmentId) {
+    function createTicket(PDO $db, $title, $description, $clientId, $departmentId = null, $priority = 'medium') {
+        $createdAt = date('Y-m-d H:i:s');
+        $updatedAt = $createdAt;
         $stmt = $db->prepare('
-            INSERT INTO tickets (title, description, client_id, department_id) 
-            VALUES (?, ?, ?, ?)
+            INSERT INTO tickets (title, description, client_id, department_id, priority, created_at, updated_at) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         ');
-        $stmt->execute(array($title, $description, $clientId, $departmentId));
+        $stmt->execute(array($title, $description, $clientId, $departmentId, $priority, $createdAt, $updatedAt));
         return (int)$db->lastInsertId();
     }
 
