@@ -13,7 +13,7 @@ section h2 {
 
 .new-ticket-button {
     display: inline-block;
-    margin-left: 495px;
+    margin-left: auto;
     padding: 6px 15px;
     background-color: #0077b6;
     color: #fff;
@@ -33,6 +33,10 @@ section h2 {
     margin-right: 10px;
 }
 
+.filters label:nth-of-type(2) {
+    margin-left: 20px;
+}
+
 .filters label:last-of-type {
     margin-left: 20px;
 }
@@ -43,6 +47,19 @@ section h2 {
     border-radius: 5px;
     border: 1px solid #ccc;
     background-color: #fff;
+}
+
+.filters button {
+  font-size: 16px;
+  padding: 6px 15px;
+  background-color: #0077b6;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  margin-left: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: bold;
 }
 
 .ticket {
