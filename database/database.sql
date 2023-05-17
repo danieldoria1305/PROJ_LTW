@@ -70,10 +70,3 @@ CREATE TABLE ticket_faqs (
     FOREIGN KEY(faq_id) REFERENCES faqs(id)
 );
 
-CREATE TABLE agent_departments (
-    agent_id INTEGER NOT NULL,
-    department_id INTEGER NOT NULL,
-    PRIMARY KEY (agent_id, department_id),
-    FOREIGN KEY(agent_id) REFERENCES users(id),
-    FOREIGN KEY(department_id) REFERENCES departments(id)
-);

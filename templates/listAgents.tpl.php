@@ -49,12 +49,9 @@
                             departmentId: selectedDepartment
                         },
                         success: function(response) {
-                            // Handle the success response here
-                            // Update the UI or perform any other actions
                             console.log(response);
                         },
                         error: function(error) {
-                            // Handle the error here
                             console.log(error);
                         }
                     });
