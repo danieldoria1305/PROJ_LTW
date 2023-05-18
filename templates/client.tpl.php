@@ -54,7 +54,7 @@
             </select>
             <label for="status-filter">Status:</label>
             <select id="status-filter">
-                <option value="all">All</option> <!-- Added "all" option -->
+                <option value="all">All</option>
                 <?php
                     $statuses = getStatus($db);
                     foreach ($statuses as $status) {
@@ -75,10 +75,13 @@
         </div>
         <?php foreach ($tickets as $ticket) { ?>
             <div class="ticket" data-department="<?= $ticket['department_id'] ?>" data-status="<?= $ticket['status_id'] ?>" data-priority="<?= $ticket['priority'] ?>">
-            <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
+            <div class="ticket-top">
+                <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
+                <a href="editTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Edit</a>
+            </div>
             <div class="ticket-info">
                 <span class="ticket-department">Department: <?= getDepartmentsNameById($db, $ticket['department_id']) ?></span>
-                <span class="ticket-status">Status: <?= $ticket['status'] ?></span>
+                <span class="ticket-status">Status: <?= getStatusNameById($db, $ticket['status_id']) ?></span>
                 <span class="ticket-priority">Priority: <?= $ticket['priority'] ?></span>
                 <span class="ticket-createdAt">Created at: <?= $ticket['created_at'] ?></span>
                 <span class="ticket-updatedAt">Last update at: <?= $ticket['updated_at'] ?></span>

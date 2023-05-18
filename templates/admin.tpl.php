@@ -25,7 +25,7 @@ function drawAdmin(Session $session)
 <head>
 <meta charset="utf-8">
 <title>Ticketly - Admin Area</title>
-<link rel="stylesheet" href="../style/client.css">
+<link rel="stylesheet" href="../style/admin.css">
 <link rel="stylesheet" href="../style/header.css">
 </head>
 <body>
@@ -43,7 +43,7 @@ function drawAdmin(Session $session)
 </header>
 <main>
     <section id="my-tickets">
-    <h2>My Tickets</h2>
+    <h2>Tickets</h2>
     <div class="filters">
         <div id="department-filter" class="filter-container">
             <label for="department-filter">Department:</label>
@@ -94,7 +94,6 @@ function drawAdmin(Session $session)
         </select>
         <button id="filter">Filter</button>
         <button id="undo-filter">Undo filters</button>
-        <a href="newTicket.php" class="new-ticket-button">Create new ticket</a>
     </div>
     <div class="ticket-container">
         <?php foreach ($tickets as $ticket) { ?>
@@ -102,7 +101,7 @@ function drawAdmin(Session $session)
             <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
             <div class="ticket-info">
                 <span class="ticket-department">Department: <?= getDepartmentsNameById($db, $ticket['department_id']) ?></span>
-                <span class="ticket-status">Status: <?= $ticket['status'] ?></span>
+                <span class="ticket-status">Status: <?= getStatusNameById($db, $ticket['status_id']) ?></span>
                 <span class="ticket-priority">Priority: <?= $ticket['priority'] ?></span>
                 <span class="ticket-createdAt">Created at: <?= $ticket['created_at'] ?></span>
                 <span class="ticket-updatedAt">Last update at: <?= $ticket['updated_at'] ?></span>

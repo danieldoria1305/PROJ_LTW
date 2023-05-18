@@ -40,7 +40,7 @@
     </header>
     <main>
         <section id="my-tickets">
-        <h2>My Tickets</h2>
+        <h2>Tickets</h2>
         <div class="filters">
             <label for="department-filter">Department:</label>
             <select id="department-filter">
@@ -71,14 +71,16 @@
             </select>
             <button id="filter">Filter</button>
             <button id="undo-filter">Undo filters</button>
-            <a href="newTicket.php" class="new-ticket-button">Create new ticket</a>
         </div>
         <?php foreach ($tickets as $ticket) { ?>
             <div class="ticket" data-department="<?= $ticket['department_id'] ?>" data-status="<?= $ticket['status_id'] ?>" data-priority="<?= $ticket['priority'] ?>">
-            <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
+            <div class="ticket-top">
+                <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
+                <a href="editTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Edit</a>
+            </div>
             <div class="ticket-info">
                 <span class="ticket-department">Department: <?= getDepartmentsNameById($db, $ticket['department_id']) ?></span>
-                <span class="ticket-status">Status: <?= $ticket['status'] ?></span>
+                <span class="ticket-status">Status: <?= getStatusNameById($db, $ticket['status_id']) ?></span>
                 <span class="ticket-priority">Priority: <?= $ticket['priority'] ?></span>
                 <span class="ticket-createdAt">Created at: <?= $ticket['created_at'] ?></span>
                 <span class="ticket-updatedAt">Last update at: <?= $ticket['updated_at'] ?></span>

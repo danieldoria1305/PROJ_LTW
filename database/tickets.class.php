@@ -9,18 +9,20 @@
         public int $id;
         public string $title;
         public string $description;
-        private int $clientId;
-        private int $agentId;
-        private int $statusId;
-        private string $priority;
-        private $createdAt;
-        private $updatedAt;
-        public int $departmentId;
+        public ?string $answer;
+        public int $clientId;
+        public ?int $agentId;
+        public int $statusId;
+        public string $priority;
+        public $createdAt;
+        public $updatedAt;
+        public ?int $departmentId;
 
-        public function __construct(?int $id, string $title, string $description, int $clientId, int $agentId, int $statusId = 1, string $priority = 'medium', ?int $departmentId) {
+        public function __construct(?int $id, string $title, string $description, ?string $answer, int $clientId, ?int $agentId, int $statusId = 1, string $priority = 'medium', ?int $departmentId) {
             $this->id = $id;
             $this->title = $title;
             $this->description = $description;
+            $this->answer = $answer;
             $this->clientId = $clientId;
             $this->agentId = $agentId;
             $this->statusId = $statusId;
@@ -74,35 +76,27 @@
         return (int)$db->lastInsertId();
     }
 
-    function deleteTicket(PDO $db, $ticketId) {
-        $stmt = $db->prepare('
-            DELETE FROM tickets WHERE id = ?
-        ');
-        $stmt->execute(array($ticketId));
-    }
-
-    function getAllTickets(PDO $db): array {
-        $stmt = $db->query('SELECT * FROM tickets');
-        $tickets = [];
-
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $ticket = new Tickets(
-                (int)$row['id'],
-                $row['title'],
-                $row['description'],
-                (int)$row['client_id'],
-                (int)$row['agent_id'],
-                (int)$row['status_id'],
-                $row['priority'],
-                (int)$row['department_id']
-            );
-
-            $tickets[] = $ticket;
+    function getTicketEditData(PDO $db, ?int $ticketId): ?Tickets {
+        $stmt = $db->prepare('SELECT * FROM tickets WHERE id = :ticketId');
+        $stmt->bindValue(':ticketId', $ticketId, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($row === false) {
+            return null;
         }
+        
+        $id = isset($row['id']) ? (int) $row['id'] : null;
+        $title = isset($row['title']) ? $row['title'] : null;
+        $description = isset($row['description']) ? $row['description'] : null;
+        $answer = isset($row['answer']) ? $row['answer'] : null;
+        $clientId = isset($row['client_id']) ? (int) $row['client_id'] : null;
+        $agentId = isset($row['agent_id']) ? (int) $row['agent_id'] : null;
+        $statusId = isset($row['status_id']) ? (int) $row['status_id'] : null;
+        $priority = isset($row['priority']) ? $row['priority'] : null;
+        $departmentId = isset($row['department_id']) ? (int) $row['department_id'] : null;
 
-        return $tickets;
+        return new Tickets($id, $title, $description, $answer, $clientId, $agentId, $statusId, $priority, $departmentId);
     }
-
-
 ?>
 
