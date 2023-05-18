@@ -10,17 +10,16 @@
             $this->id = $id;
             $this->name = $name;
         }
+    }
 
-        public function createDepartment(PDO $db, $name) {
-            $stmt = $db->prepare('
-                INSERT INTO departments (Name)
-                VALUES (?)
-            ');
+    function createDepartment(PDO $db, $name) {
+        $stmt = $db->prepare('
+            INSERT INTO departments (Name)
+            VALUES (?)
+        ');
 
-            $stmt->execute(array($name));
-            return (int)$db->lastInsertId();
-        }
-
+        $stmt->execute(array($name));
+        return (int)$db->lastInsertId();
     }
 
     function getDepartments(PDO $db): array {

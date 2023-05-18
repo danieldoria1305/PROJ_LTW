@@ -8,7 +8,11 @@ section {
 
 section h2 {
     color: #0077b6;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#my-tickets {
+    margin-bottom: 80px;
 }
 
 .new-ticket-button {
@@ -25,20 +29,13 @@ section h2 {
 .filters {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     margin-bottom: 20px;
 }
 
 .filters label {
     font-size: 16px;
-    margin-right: 10px;
-}
-
-.filters label:nth-of-type(2) {
-    margin-left: 20px;
-}
-
-.filters label:last-of-type {
-    margin-left: 20px;
+    margin-right: 5px;
 }
 
 .filters select {
@@ -49,6 +46,10 @@ section h2 {
     background-color: #fff;
 }
 
+#priority-filter {
+  margin-right: 20px; /* Add this line to add space to the right */
+}
+
 .filters button {
   font-size: 16px;
   padding: 6px 15px;
@@ -56,10 +57,37 @@ section h2 {
   color: #fff;
   border-radius: 5px;
   border: none;
-  margin-left: 20px;
+  margin-left: 10px;
   cursor: pointer;
   white-space: nowrap;
   font-weight: bold;
+  margin-right: 10px;
+}
+
+#add-department, #add-status {
+  padding: 1px 5px;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.filter-container {
+    position: relative;
+}
+
+.filter-container > div {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 10px;
+}
+
+.ticket-container {
+    margin-top: 10px;
+    position: relative;
+}
+
+.ticket-container.open-form {
+    margin-top: 70px; /* Adjust the value as needed to make space for the forms */
 }
 
 .ticket {
@@ -88,3 +116,33 @@ section h2 {
 .ticket-summary {
     font-size: 16px;
 }
+
+.button-group {
+    display: flex;
+    align-items: center;
+    justify-content:left;
+}
+
+.button-group button {
+    font-size: small;
+    padding: 2px 8px; /* Adjust the padding as desired */
+    margin-right: 5px; /* Add space between the buttons */
+    margin-left: 0;
+    margin-top: 1px;
+}
+
+#new-department-input,
+#new-status-input {
+    font-size: smaller;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin-right: 10px;
+}
+
+#new-department-input::placeholder,
+#new-status-input::placeholder {
+    color: #999;
+}
+

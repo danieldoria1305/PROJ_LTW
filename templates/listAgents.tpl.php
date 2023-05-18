@@ -3,7 +3,7 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Ticketly - Clients' List</title>
+        <title>Ticketly - Agents' List</title>
         <link rel="stylesheet" href="../style/listClients.css">
         <link rel="stylesheet" href="../style/header.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -61,7 +61,7 @@
     </head>
     <body>
         <header>
-            <h1>Ticketly<span class="smaller">Clients' List</span></h1>
+            <h1>Ticketly <span class="smaller">Agents' List</span></h1>
             <nav>
                 <ul>
                     <li><a href="../pages/client.php">Back to My Tickets</a></li>

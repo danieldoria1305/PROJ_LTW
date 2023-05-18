@@ -2,6 +2,7 @@
 
     public array $messages;
     public ?string $username;
+    public string $role = '';
 
     public function __construct() {
         session_start();
@@ -9,6 +10,7 @@
         unset($_SESSION['messages']);
 
         $this->username = $_SESSION['username'] ?? null;
+        $this->role = $_SESSION['role'] ?? '';
     }
 
     public function init() {
@@ -25,13 +27,17 @@
         $_SESSION['userID'] = $id;
     }
 
-    public function getUsername(): ?string {
-        return $this->username;
-    }
-
     public function setUsername(string $username) {
         $_SESSION['username'] = $username;
         $this->username = $username;
+    }
+
+    public function setRole(string $role) {
+        $_SESSION['role'] = $role;
+    }
+
+    public function getUsername(): ?string {
+        return $this->username;
     }
 
     public function hasUsername(): bool {
@@ -70,10 +76,6 @@
 
     public function setName(string $name) {
         $_SESSION['name'] = $name;
-    }
-
-    public function setRole(string $role) {
-        $_SESSION['role'] = $role;
     }
 
     public function addMessage(string $type, string $text) {

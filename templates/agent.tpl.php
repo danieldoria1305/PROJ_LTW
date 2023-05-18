@@ -1,4 +1,4 @@
-<?php function drawClient(Session $session){?>
+<?php function drawAgent(Session $session){?>
     <?php
         session_start();
 
@@ -14,8 +14,8 @@
         $clientId = $session->getId();
 
         $db = getDatabaseConnection();
-        $stmt = $db->prepare('SELECT * FROM tickets WHERE client_id = ?');
-        $stmt->execute([$clientId]);
+        $stmt = $db->prepare('SELECT * FROM tickets');
+        $stmt->execute();
         $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
@@ -23,13 +23,13 @@
     <html>
     <head>
     <meta charset="utf-8">
-    <title>Ticketly - Client Area</title>
+    <title>Ticketly - Agent Area</title>
     <link rel="stylesheet" href="../style/client.css">
     <link rel="stylesheet" href="../style/header.css">
     </head>
     <body>
     <header>
-        <h1>Ticketly <span class="smaller">Client Area</span></h1>
+        <h1>Ticketly <span class="smaller">Agent Area</span></h1>
         <nav>
         <ul>
             <li><a href="myPage.php">My Page</a></li>
@@ -54,7 +54,7 @@
             </select>
             <label for="status-filter">Status:</label>
             <select id="status-filter">
-                <option value="all">All</option> <!-- Added "all" option -->
+                <option value="all">All</option>
                 <?php
                     $statuses = getStatus($db);
                     foreach ($statuses as $status) {

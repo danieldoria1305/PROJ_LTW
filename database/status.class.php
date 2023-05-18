@@ -11,16 +11,16 @@
             $this->name = $name;
         }
 
-        public function createStatus(PDO $db, $name) {
-            $stmt = $db->prepare('
-                INSERT INTO status (Name)
-                VALUES (?)
-            ');
+    }
 
-            $stmt->execute(array($name));
-            return (int)$db->lastInsertId();
-        }
+    function createStatus(PDO $db, $name) {
+        $stmt = $db->prepare('
+            INSERT INTO status (Name)
+            VALUES (?)
+        ');
 
+        $stmt->execute(array($name));
+        return (int)$db->lastInsertId();
     }
 
     function getStatus(PDO $db): array {

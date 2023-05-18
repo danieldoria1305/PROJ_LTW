@@ -32,13 +32,17 @@
                         <li>
                             <h4><?php echo htmlspecialchars($faq->question); ?></h4>
                             <p><?php echo htmlspecialchars($faq->answer); ?></p>
-                            <a href="editFaq.php?id=<?php echo $faq->id; ?>" class="edit-button">Edit</a>
+                            <?php if ($session->role !== 'client') : ?>
+                                <a href="editFaq.php?id=<?php echo $faq->id; ?>" class="edit-button">Edit</a>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
-                <div class="create-faq">
-                    <a class="button" href="newFaq.php">Create new FAQ</a>
-                </div>
+                <?php if ($session->role !== 'client') : ?>
+                    <div class="create-faq">
+                        <a class="button" href="newFaq.php">Create new FAQ</a>
+                    </div>
+                <?php endif; ?>
             </section>
         </main>
         <?php include '../templates/footer.tpl.php';?>

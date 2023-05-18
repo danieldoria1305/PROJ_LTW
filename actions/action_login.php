@@ -9,11 +9,6 @@
     $session = new Session();
     $session->init();
 
-    if (isset($session->username)) {
-        header("Location: ../pages/client.php");
-        exit();
-    }
-
     $username_error = $email_error = $password_error = '';
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -49,9 +44,11 @@
             } else {
                 $_SESSION['userID'] = $user->id;
                 $_SESSION['username'] = $user->username;
+                $_SESSION['role'] = $user->role;
                 $session->setId($user->id);
                 $session->setUsername($user->username);
-                header('Location: ../pages/client.php');
+                $session->setRole($user->role);
+                redirectBasedOnRole($user->role);
             }
         }
 
@@ -59,8 +56,26 @@
             require_once '../templates/login.tpl.php';
             drawLogin($session, $username_error, $email_error, $password_error);
         }
+    } else {
+        require_once '../templates/login.tpl.php';
     }
 
-    else require_once '../templates/login.tpl.php';
+    function redirectBasedOnRole(string $role){
+        switch ($role) {
+            case 'client':
+                header('Location: ../pages/client.php');
+                break;
+            case 'agent':
+                header('Location: ../pages/agent.php');
+                break;
+            case 'admin':
+                header('Location: ../pages/admin.php');
+                break;
+            default:
+                header('Location: ../pages/index.php');
+                break;
+        }
+        exit();
+    }
 
 ?>

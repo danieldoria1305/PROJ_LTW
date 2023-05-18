@@ -9,7 +9,7 @@
     </head>
     <body>
         <header>
-            <h1>Ticketly<span class="smaller">CLients' List</span></h1>
+            <h1>Ticketly <span class="smaller">Clients' List</span></h1>
             <nav>
                 <ul>
                     <li><a href="../pages/client.php">Back to My Tickets</a></li>

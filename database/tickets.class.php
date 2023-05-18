@@ -80,5 +80,29 @@
         ');
         $stmt->execute(array($ticketId));
     }
+
+    function getAllTickets(PDO $db): array {
+        $stmt = $db->query('SELECT * FROM tickets');
+        $tickets = [];
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $ticket = new Tickets(
+                (int)$row['id'],
+                $row['title'],
+                $row['description'],
+                (int)$row['client_id'],
+                (int)$row['agent_id'],
+                (int)$row['status_id'],
+                $row['priority'],
+                (int)$row['department_id']
+            );
+
+            $tickets[] = $ticket;
+        }
+
+        return $tickets;
+    }
+
+
 ?>
 
