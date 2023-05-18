@@ -1,4 +1,12 @@
-<?php function drawNewTicket(Session $session, $title_error = '', $description_error = '') {?>
+<?php function drawNewTicket(Session $session, $title_error = '', $description_error = '') {
+    
+    session_start();
+
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../pages/index.php");
+    }
+    ?>
+    
     <!DOCTYPE html>
     <html>
         <head>
@@ -12,7 +20,7 @@
                 <h1><a href="../pages/index.php"> Ticketly</a> <span class="smaller">New Ticket</span></h1>
                 <nav>
                     <ul>
-                        <li><a href="client.php">Back to My Tickets</a></li>
+                        <li><a href="client.php">Back to Tickets</a></li>
                         <li><a href="../actions/action_logout.php">Log out</a></li>
                     </ul>
                 </nav>

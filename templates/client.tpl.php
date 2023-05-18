@@ -75,18 +75,21 @@
         </div>
         <?php foreach ($tickets as $ticket) { ?>
             <div class="ticket" data-department="<?= $ticket['department_id'] ?>" data-status="<?= $ticket['status_id'] ?>" data-priority="<?= $ticket['priority'] ?>">
-            <div class="ticket-top">
-                <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
-                <a href="editTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Edit</a>
-            </div>
-            <div class="ticket-info">
-                <span class="ticket-department">Department: <?= getDepartmentsNameById($db, $ticket['department_id']) ?></span>
-                <span class="ticket-status">Status: <?= getStatusNameById($db, $ticket['status_id']) ?></span>
-                <span class="ticket-priority">Priority: <?= $ticket['priority'] ?></span>
-                <span class="ticket-createdAt">Created at: <?= $ticket['created_at'] ?></span>
-                <span class="ticket-updatedAt">Last update at: <?= $ticket['updated_at'] ?></span>
-            </div>
-            <p class="ticket-summary"><?= $ticket['description'] ?></p>
+                <div class="ticket-top">
+                    <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
+                    <a href="editTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Edit</a>
+                </div>
+                <div class="ticket-info">
+                    <span class="ticket-department">Department: <?= getDepartmentsNameById($db, $ticket['department_id']) ?></span>
+                    <span class="ticket-status">Status: <?= getStatusNameById($db, $ticket['status_id']) ?></span>
+                    <span class="ticket-priority">Priority: <?= $ticket['priority'] ?></span>
+                    <span class="ticket-createdAt">Created at: <?= $ticket['created_at'] ?></span>
+                    <span class="ticket-updatedAt">Last update at: <?= $ticket['updated_at'] ?></span>
+                </div>
+                <div class="ticket-details">
+                    <p class="ticket-summary"><strong>Description:</strong> <?= $ticket['description'] ?></p>
+                    <p class="ticket-answer"><strong>Answer:</strong> <?= $ticket['answer'] ?></p>
+                </div>
             </div>
         <?php } ?>
         </section>

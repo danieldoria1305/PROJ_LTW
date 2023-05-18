@@ -61,7 +61,7 @@ select, input[type="submit"] {
 
 select {
     margin-right: 10px;
-    max-width: 200px; /* Adjust the max-width as needed */
+    max-width: 200px;
 }
 
 input[type="submit"] {
@@ -80,4 +80,17 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #005b8a; /* Darker shade on hover */
+}
+
+button {
+    display: inline-block;
+    margin-left: auto;
+    padding: 4px 10px;
+    background-color: #0077b6;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
 }

@@ -1,4 +1,12 @@
-<?php function drawNewFaq(Session $session, $question_error = '', $answer_error = '') {?>
+<?php function drawNewFaq(Session $session, $question_error = '', $answer_error = '') {
+    
+    session_start();
+
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../pages/index.php");
+    }
+    ?>
+    
     <!DOCTYPE html>
     <html lang="en">
     <head>

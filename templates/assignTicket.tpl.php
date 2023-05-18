@@ -1,4 +1,4 @@
-<?php function drawListClients(Session $session) {
+<?php function drawAssignTicket(Session $session) {
     
     session_start();
 
@@ -11,13 +11,18 @@
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Ticketly - CLients' List</title>
+        <title>Ticketly - Assign Agent</title>
         <link rel="stylesheet" href="../style/listClients.css">
         <link rel="stylesheet" href="../style/header.css">
+        <script>
+            function confirmAssign() {
+                return confirm("Are you sure you want to assign this ticket to the selected agent?");
+            }
+        </script>
     </head>
     <body>
         <header>
-            <h1>Ticketly <span class="smaller">Clients' List</span></h1>
+            <h1>Ticketly <span class="smaller">Assign Agent</span></h1>
             <nav>
                 <ul>
                     <li><a href="../pages/client.php">Back to Tickets</a></li>
@@ -27,14 +32,14 @@
         </header>
 
         <main>
-            <h2>Clients</h2>
-            <section id="clients">
+            <h2>Agents</h2>
+            <section id="agents">
                 <table>
                     <tr>
                         <th>Name</th>
                         <th>Username</th>
-                        <th>E-mail</th>
-                        <th>Role</th>
+                        <th>Email</th>
+                        <th>Assign</th>
                     </tr>
                     <?php
                         require_once '../database/connection.db.php';
@@ -42,27 +47,24 @@
                         
                         $db = getDatabaseConnection();
                         
-                        $clients = getClients($db);
+                        $agents = getAgents($db);
                         
-                        foreach ($clients as $client) { ?>
+                        foreach ($agents as $agent) { ?>
                         <tr>
-                            <td><?php echo $client->name ?></td>
-                            <td><?php echo $client->username ?></td>
-                            <td><?php echo $client->email ?></td>
+                            <td><?php echo $agent->name ?></td>
+                            <td><?php echo $agent->username ?></td>
+                            <td><?php echo $agent->email ?></td>
                             <td>
-                                <form method="post" action="../actions/action_editRole.php">
-                                    <input type="hidden" name="clientId" value="<?php echo $client->id ?>">
-                                    <select id="role" name="role">
-                                        <option value="client" <?php if ($client->role == 'client') echo 'selected' ?>>Client</option>
-                                        <option value="agent" <?php if ($client->role == 'agent') echo 'selected' ?>>Agent</option>
-                                        <option value="admin" <?php if ($client->role == 'admin') echo 'selected' ?>>Admin</option>
-                                    </select>
-                                    <input type="submit" value="Save">
+                                <form method="POST" action="../actions/action_assignTicket.php" onsubmit="return confirmAssign();">
+                                    <input type="hidden" name="ticket_id" value="<?php echo $_GET['id']; ?>">
+                                    <input type="hidden" name="agent_id" value="<?php echo $agent->id; ?>">
+                                    <button type="submit" name="assign_ticket">Assign</button>
                                 </form>
                             </td>
                         </tr>
                     <?php } ?>
                 </table>
+            </section>
         </main>
 
         <?php include '../templates/footer.tpl.php';?>

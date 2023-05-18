@@ -10,8 +10,8 @@
     $session = new Session();
     $session->init();
 
-    if (isset($session->username)) {
-        header("Location: ../pages/client.php");
+    if (!isset($session->username)) {
+        header("Location: ../pages/index.php");
         exit();
     }
 

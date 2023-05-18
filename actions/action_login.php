@@ -5,6 +5,7 @@
     require_once '../database/connection.db.php';
     require_once '../database/user.class.php';
     require_once '../utils/session.php';
+    require_once '../pages/redirect.php';
 
     $session = new Session();
     $session->init();
@@ -58,24 +59,6 @@
         }
     } else {
         require_once '../templates/login.tpl.php';
-    }
-
-    function redirectBasedOnRole(string $role){
-        switch ($role) {
-            case 'client':
-                header('Location: ../pages/client.php');
-                break;
-            case 'agent':
-                header('Location: ../pages/agent.php');
-                break;
-            case 'admin':
-                header('Location: ../pages/admin.php');
-                break;
-            default:
-                header('Location: ../pages/index.php');
-                break;
-        }
-        exit();
     }
 
 ?>

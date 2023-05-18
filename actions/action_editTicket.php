@@ -6,6 +6,7 @@
     require_once '../database/tickets.class.php';
     require_once '../utils/session.php';
     require_once '../templates/editTicket.tpl.php';
+    require_once '../pages/redirect.php';
 
     $session = new Session();
 

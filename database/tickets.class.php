@@ -121,6 +121,51 @@
         return $stmt->execute();
     }
 
+    function getTicketById(PDO $db, int $ticketId): ?Tickets{
+        $stmt = $db->prepare('SELECT * FROM tickets WHERE id = :ticketId');
+        $stmt->bindValue(':ticketId', $ticketId, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row === false) {
+            return null;
+        }
+
+        $id = isset($row['id']) ? (int) $row['id'] : null;
+        $title = isset($row['title']) ? $row['title'] : null;
+        $description = isset($row['description']) ? $row['description'] : null;
+        $answer = isset($row['answer']) ? $row['answer'] : null;
+        $clientId = isset($row['client_id']) ? (int) $row['client_id'] : null;
+        $agentId = isset($row['agent_id']) ? (int) $row['agent_id'] : null;
+        $statusId = isset($row['status_id']) ? (int) $row['status_id'] : null;
+        $priority = isset($row['priority']) ? $row['priority'] : null;
+        $departmentId = isset($row['department_id']) ? (int) $row['department_id'] : null;
+
+        return new Tickets($id, $title, $description, $answer, $clientId, $agentId, $statusId, $priority, $departmentId);
+    }
+
+    function updateTicketAgent(PDO $db, int $ticketId, int $agentId): bool {
+        $updatedAt = date('Y-m-d H:i:s');
+        $statusId = $agentId !== null ? 2 : 1; // Change the status ID based on the agent ID
+
+        $stmt = $db->prepare('
+            UPDATE tickets
+            SET agent_id = :agentId, status_id = :statusId, updated_at = :updatedAt
+            WHERE id = :ticketId
+        ');
+
+        $stmt->bindValue(':agentId', $agentId, PDO::PARAM_INT);
+        $stmt->bindValue(':statusId', $statusId, PDO::PARAM_INT); // Update the status ID
+        $stmt->bindValue(':updatedAt', $updatedAt, PDO::PARAM_STR);
+        $stmt->bindValue(':ticketId', $ticketId, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
     
+    function deleteTicket(PDO $db, ?int $ticketId): bool {
+        $stmt = $db->prepare('DELETE FROM tickets WHERE id = :ticketId');
+        $stmt->bindValue(':ticketId', $ticketId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 ?>
 

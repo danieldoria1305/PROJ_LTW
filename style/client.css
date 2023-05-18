@@ -80,25 +80,29 @@ section h2 {
 }
 
 .ticket-info {
-    margin-bottom: 10px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    color:#5f5f5f;
 }
 
 .ticket-info span {
     display: inline-block;
     margin-right: 20px;
-    font-size: 14px;
+}
+
+.ticket-details {
+    font-size: 15px;
 }
 
 .ticket-summary {
-    font-size: 16px;
+    margin-bottom: 10px;
 }
-
 
 .ticket-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .edit-button {

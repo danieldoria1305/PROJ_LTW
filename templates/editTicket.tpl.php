@@ -1,5 +1,12 @@
 <?php
-function drawEditTicket(Session $session, $title_error = '', $description_error = ''){
+function drawEditTicket(Session $session, $title_error = '', $description_error = '') {
+    
+    session_start();
+
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../pages/index.php");
+    }
+    
     require_once '../database/connection.db.php';
     require_once '../database/tickets.class.php';
 
@@ -33,7 +40,7 @@ function drawEditTicket(Session $session, $title_error = '', $description_error 
                 <h1>Ticketly <span class="smaller">Edit Ticket</span></h1>
                 <nav>
                     <ul>
-                        <li><a href="client.php">Back to My Tickets</a></li>
+                        <li><a href="client.php">Back to Tickets</a></li>
                         <li><a href="../actions/action_logout.php">Log out</a></li>
                     </ul>
                 </nav>
@@ -118,6 +125,10 @@ function drawEditTicket(Session $session, $title_error = '', $description_error 
                     <div class="form-row">
                         <input type="submit" value="Save Changes">
                     </div>
+                </form>
+                <form id="delete-form" action="../actions/action_deleteTicket.php" method="post">
+                    <input type="hidden" name="ticket_id" value="<?php echo $ticket->id; ?>">
+                    <button type="submit">Delete</button>
                 </form>
             </main>
         </body>

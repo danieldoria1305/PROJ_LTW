@@ -1,4 +1,12 @@
-<?php function drawListAgents(Session $session) {?>
+<?php function drawListAgents(Session $session) {
+    
+    session_start();
+
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../pages/index.php");
+    }
+    ?>
+    
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -64,7 +72,7 @@
             <h1>Ticketly <span class="smaller">Agents' List</span></h1>
             <nav>
                 <ul>
-                    <li><a href="../pages/client.php">Back to My Tickets</a></li>
+                    <li><a href="../pages/client.php">Back to Tickets</a></li>
                     <li><a href="../actions/action_logout.php">Log out</a></li>
                 </ul>
             </nav>
@@ -123,9 +131,9 @@
                                 </select>
                                 <input type="submit" value="Save">
                             </form>
-                        </td>
-                    </tr>
-                <?php } ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </table>
             </section>
         </main>

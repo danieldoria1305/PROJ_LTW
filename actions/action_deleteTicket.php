@@ -3,8 +3,9 @@
     declare(strict_types=1);
 
     require_once '../database/connection.db.php';
-    require_once '../database/faqs.class.php';
+    require_once '../database/tickets.class.php';
     require_once '../utils/session.php';
+    require_once '../pages/redirect.php';
 
     $session = new Session();
 
@@ -15,14 +16,15 @@
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
-        $faqId = isset($_POST["faq_id"]) ? (int)$_POST["faq_id"] : (isset($_GET['id']) ? (int)$_GET['id'] : null);
+        $ticketId = isset($_POST["ticket_id"]) ? (int)$_POST["ticket_id"] : (isset($_GET['id']) ? (int)$_GET['id'] : null);
 
         $db = getDatabaseConnection();
 
-        deleteFaq($db, $faqId);
-        header('Location: ../pages/faq.php');
+        deleteTicket($db, $ticketId);
+        redirectBasedOnRole($_SESSION['role']);
+        
         exit();
     }
 
-    drawEditFaq($session);
+    drawEditTicket($session);
 ?>

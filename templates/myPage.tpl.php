@@ -1,4 +1,11 @@
 <?php function drawMyPage(Session $session, $name_error = '', $username_error = '', $email_error = '', $password_error = '') {
+    
+    session_start();
+
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../pages/index.php");
+    }
+    
     require_once '../database/connection.db.php';
     require_once '../database/user.class.php';
     
@@ -30,7 +37,7 @@
             <h1>Ticketly <span class="smaller">Edit Profile</span></h1>
             <nav>
                 <ul>
-                    <li><a href="client.php">Back to My Tickets</a></li>
+                    <li><a href="client.php">Back to Tickets</a></li>
                     <li><a href="../actions/action_logout.php">Log out</a></li>
                 </ul>
             </nav>

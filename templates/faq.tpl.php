@@ -1,10 +1,18 @@
-<?php function drawFaq(Session $session){
+<?php function drawFaq(Session $session) {
+    
+    session_start();
+
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../pages/index.php");
+    }
+    
     require_once '../database/connection.db.php';
     require_once '../database/faqs.class.php';
     
     $db = getDatabaseConnection();
     $faqs = getFaqData($db);
     ?>
+    
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -19,7 +27,7 @@
             <h1>Ticketly <span class="smaller">FAQ</span></h1>
             <nav>
                 <ul>
-                    <li><a href="client.php">Back to My Tickets</a></li>
+                    <li><a href="client.php">Back to Tickets</a></li>
                     <li><a href="../actions/action_logout.php">Log out</a></li>
                 </ul>
             </nav>

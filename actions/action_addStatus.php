@@ -7,6 +7,11 @@
 
     $session = new Session();
 
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../pages/index.php");
+        exit();
+    }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newStatus = $_POST['newStatus'] ?? '';
 

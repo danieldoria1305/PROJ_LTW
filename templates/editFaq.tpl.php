@@ -1,4 +1,11 @@
 <?php function drawEditFaq(Session $session, $question_error = '', $answer_error = '') {
+    
+    session_start();
+
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../pages/index.php");
+    }
+
     require_once '../database/connection.db.php';
     require_once '../database/faqs.class.php';
     

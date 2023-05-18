@@ -6,8 +6,14 @@
     require_once '../database/user.class.php';
     require_once '../utils/session.php';
     require_once '../templates/myPage.tpl.php';
+    require_once '../pages/redirect.php';
 
     $session = new Session();
+
+    if (!isset($session->username)) {
+        header("Location: ../pages/index.php");
+        exit();
+    }    
 
     $name_error = $username_error = $email_error = $password_error = '';
 
@@ -71,7 +77,7 @@
 
         if (!$has_error) {
             $user = updateUser($db, $currentUser->id, $username, $password, $name, $email);
-            header('Location: ../pages/client.php');
+            redirectBasedOnRole($_SESSION['role']);
         }
     }
 
