@@ -98,5 +98,29 @@
 
         return new Tickets($id, $title, $description, $answer, $clientId, $agentId, $statusId, $priority, $departmentId);
     }
+
+    function updateTicket(PDO $db, int $ticketId, string $title, string $description, string $answer, int $clientId, int $agentId, int $statusId, string $priority, int $departmentId): bool {
+        $updatedAt = date('Y-m-d H:i:s');
+        $stmt = $db->prepare('
+            UPDATE tickets
+            SET title = :title, description = :description, answer = :answer, client_id = :clientId, agent_id = :agentId, status_id = :statusId, priority = :priority, department_id = :departmentId, updated_at = :updatedAt
+            WHERE id = :ticketId
+        ');
+
+        $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+        $stmt->bindValue(':description', $description, PDO::PARAM_STR);
+        $stmt->bindValue(':answer', $answer, PDO::PARAM_STR);
+        $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
+        $stmt->bindValue(':agentId', $agentId, PDO::PARAM_INT);
+        $stmt->bindValue(':statusId', $statusId, PDO::PARAM_INT);
+        $stmt->bindValue(':priority', $priority, PDO::PARAM_STR);
+        $stmt->bindValue(':departmentId', $departmentId, PDO::PARAM_INT);
+        $stmt->bindValue(':updatedAt', $updatedAt, PDO::PARAM_STR);
+        $stmt->bindValue(':ticketId', $ticketId, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+    
 ?>
 

@@ -1,5 +1,5 @@
 <?php
-function drawEditTicket(Session $session, $title_error = '', $description_error = '', $answer_error = ''){
+function drawEditTicket(Session $session, $title_error = '', $description_error = ''){
     require_once '../database/connection.db.php';
     require_once '../database/tickets.class.php';
 
@@ -88,27 +88,26 @@ function drawEditTicket(Session $session, $title_error = '', $description_error 
                             }
                             ?>
                         </select>
-                        <label for="status">Status:</label>
-                        <select id="status" name="status_id">
-                            <?php
-                            include_once '../database/status.class.php';
-                            include_once '../database/connection.db.php';
-                            $db = getDatabaseConnection();
-                            $statuses = getStatus($db);
-                            foreach ($statuses as $status) {
-                                $selected = ($status->id === $ticket->statusId) ? 'selected' : '';
-                                echo '<option value="' . $status->id . '" ' . $selected . '>' . $status->name . '</option>';
-                            }
-                            ?>
-                        </select>
+                        <?php if ($session->role !== 'client') : ?>
+                            <label for="status">Status:</label>
+                            <select id="status" name="status_id">
+                                <?php
+                                include_once '../database/status.class.php';
+                                include_once '../database/connection.db.php';
+                                $db = getDatabaseConnection();
+                                $statuses = getStatus($db);
+                                foreach ($statuses as $status) {
+                                    $selected = ($status->id === $ticket->statusId) ? 'selected' : '';
+                                    echo '<option value="' . $status->id . '" ' . $selected . '>' . $status->name . '</option>';
+                                }
+                                ?>
+                            </select>
+                        <?php endif; ?>
                     </div>
                     <div>
                         <?php if ($session->role !== 'client') : ?>
                             <label for="answer">Answer:</label>
-                            <textarea id="answer" name="answer" required><?php echo htmlspecialchars($ticket->answer); ?></textarea>
-                            <?php if (!empty($answer_error)) : ?>
-                                <div class="error"><?php echo htmlspecialchars($answer_error); ?></div>
-                            <?php endif; ?>
+                            <textarea id="answer" name="answer"><?php echo htmlspecialchars($ticket->answer); ?></textarea>
                         <?php else: ?>
                             <label for="answer">Answer:</label>
                             <span id="answer-display"><?php echo htmlspecialchars($ticket->answer); ?></span>
