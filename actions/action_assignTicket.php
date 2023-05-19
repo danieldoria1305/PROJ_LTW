@@ -6,6 +6,7 @@
     require_once '../utils/session.php';
     require_once '../templates/assignTicket.tpl.php';
     require_once '../database/tickets.class.php';
+    require_once '../database/ticketLogs.class.php';
     require_once '../pages/redirect.php';
 
     $session = new Session();
@@ -27,7 +28,13 @@
         $ticket = getTicketById($db, $ticketID);
 
         if ($ticket) {
+            $previousAgentID = $ticket->agentId;
+            
             updateTicketAgent($db, $ticketID, $agentID);
+
+            $log = new TicketLogs((int)$ticketID, (int)$ticketID, 'agentId', (string)$previousAgentID, (string)$agentID);
+            $log->saveLog($db);
+
             redirectBasedOnRole($_SESSION['role']);
             exit();
         }

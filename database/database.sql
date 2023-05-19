@@ -77,3 +77,12 @@ CREATE TABLE ticket_faqs (
     FOREIGN KEY(faq_id) REFERENCES faqs(id)
 );
 
+CREATE TABLE ticket_logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ticket_id INTEGER NOT NULL,
+    field VARCHAR(255) NOT NULL,
+    old_value TEXT,
+    new_value TEXT,
+    created_at DATETIME NOT NULL,
+    FOREIGN KEY(ticket_id) REFERENCES tickets(id)
+);

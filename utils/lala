@@ -47,7 +47,7 @@
 
             $ticketId = createTicket($db, $title, $description, $clientId, $departmentId, $priority);
 
-            $log = new TicketLogs((int)$ticketId, (int)$ticketId, 'created_at', '', date('Y-m-d H:i:s'));
+            $log = new TicketLogs((int)$ticketID, $ticketID, 'created_at', '', date('Y-m-d H:i:s'));
             $log->saveLog($db);
 
             header('Location: ../pages/client.php');

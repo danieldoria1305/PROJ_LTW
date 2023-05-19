@@ -79,6 +79,7 @@
                     <div class="edit-buttons">
                         <a href="assignTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Assign</a>
                         <a href="editTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Edit</a>
+                        <a href="ticketLog.php?id=<?= $ticket['id'] ?>" class="edit-button">Ticket log</a>
                     </div>
                 </div>
                 <div class="ticket-info">
