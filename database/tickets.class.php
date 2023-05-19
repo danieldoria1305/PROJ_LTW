@@ -46,23 +46,6 @@
 
             return $hashtags;
         }
-
-
-        public function getTicketFAQs() {
-            $db = getDatabaseConnection();
-
-            $stmt = $db->prepare('SELECT faqs.id, faqs.question, faqs.answer FROM faqs INNER JOIN ticket_faqs ON faqs.id = ticket_faqs.faq_id WHERE ticket_faqs.ticket_id = ?');
-            $stmt->bindParam(1, $this->id, PDO::PARAM_INT);
-            $stmt->execute();
-
-            $faqs = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $faqs[] = $row;
-            }
-
-            return $faqs;
-        }
-
     }
 
     function createTicket(PDO $db, $title, $description, $clientId, $departmentId = null, $priority = 'medium') {

@@ -1,6 +1,7 @@
 .mode columns 
 .headers on
 
+DROP TABLE IF EXISTS inquiries;
 DROP TABLE IF EXISTS ticket_logs;
 DROP TABLE IF EXISTS ticket_hashtags;
 DROP TABLE IF EXISTS faqs;
@@ -81,4 +82,15 @@ CREATE TABLE ticket_logs (
     new_value TEXT,
     created_at DATETIME NOT NULL,
     FOREIGN KEY(ticket_id) REFERENCES tickets(id)
+);
+
+CREATE TABLE inquiries (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ticket_id INTEGER NOT NULL,
+    user_role VARCHAR(10) NOT NULL CHECK (user_role IN ('client', 'agent', 'admin')),
+    user_id INTEGER NOT NULL,
+    message TEXT NOT NULL,
+    created_at DATETIME NOT NULL,
+    FOREIGN KEY(ticket_id) REFERENCES tickets(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
 );

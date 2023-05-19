@@ -1,6 +1,4 @@
 <?php function drawMyPage(Session $session, $name_error = '', $username_error = '', $email_error = '', $password_error = '') {
-    
-    session_start();
 
     if (!isset($_SESSION['userID'])) {
         header("Location: ../pages/index.php");

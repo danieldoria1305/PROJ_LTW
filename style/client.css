@@ -101,7 +101,6 @@ section h2 {
 .ticket-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 5px;
 }
 
@@ -116,4 +115,8 @@ section h2 {
     font-weight: bold;
     transition: background-color 0.3s ease;
     font-size: small;
+}
+
+.edit-buttons {
+    margin-left: auto;
 }

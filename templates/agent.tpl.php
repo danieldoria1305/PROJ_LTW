@@ -22,7 +22,7 @@
     <head>
     <meta charset="utf-8">
     <title>Ticketly - Agent Area</title>
-    <link rel="stylesheet" href="../style/agent.css">
+    <link rel="stylesheet" href="../style/client.css">
     <link rel="stylesheet" href="../style/header.css">
     </head>
     <body>
@@ -75,6 +75,7 @@
                 <div class="ticket-top">
                     <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
                     <div class="edit-buttons">
+                        <a href="inquiries.php?id=<?= $ticket['id'] ?>" class="edit-button">Inquiries</a>
                         <a href="assignTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Assign</a>
                         <a href="editTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Edit</a>
                         <a href="ticketLog.php?id=<?= $ticket['id'] ?>" class="edit-button">Ticket log</a>

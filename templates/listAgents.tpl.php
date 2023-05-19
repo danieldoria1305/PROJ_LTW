@@ -1,6 +1,4 @@
 <?php function drawListAgents(Session $session) {
-    
-    session_start();
 
     if (!isset($_SESSION['userID'])) {
         header("Location: ../pages/index.php");

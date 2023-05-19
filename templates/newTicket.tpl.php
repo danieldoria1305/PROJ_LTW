@@ -1,6 +1,4 @@
 <?php function drawNewTicket(Session $session, $title_error = '', $description_error = '') {
-    
-    session_start();
 
     if (!isset($_SESSION['userID'])) {
         header("Location: ../pages/index.php");

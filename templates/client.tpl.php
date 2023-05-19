@@ -76,7 +76,10 @@
             <div class="ticket" data-department="<?= $ticket['department_id'] ?>" data-status="<?= $ticket['status_id'] ?>" data-priority="<?= $ticket['priority'] ?>">
                 <div class="ticket-top">
                     <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
-                    <a href="editTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Edit</a>
+                    <div class="edit-buttons">
+                        <a href="inquiries.php?id=<?= $ticket['id'] ?>" class="edit-button">Inquiries</a>
+                        <a href="editTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Edit</a>
+                    </div>
                 </div>
                 <div class="ticket-info">
                     <span class="ticket-department">Department: <?= getDepartmentsNameById($db, $ticket['department_id']) ?></span>
