@@ -1,14 +1,15 @@
 .mode columns 
 .headers on
 
-DROP TABLE IF EXISTS agent_departments;
-DROP TABLE IF EXISTS ticket_faqs;
+DROP TABLE IF EXISTS ticket_logs;
 DROP TABLE IF EXISTS ticket_hashtags;
+DROP TABLE IF EXISTS faqs;
 DROP TABLE IF EXISTS tickets;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS status;
 DROP TABLE IF EXISTS hashtags;
 DROP TABLE IF EXISTS departments;
-DROP TABLE IF EXISTS faqs;
+
 
 CREATE TABLE departments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,6 +25,7 @@ CREATE TABLE status (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(255) NOT NULL UNIQUE
 );
+
 
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -55,11 +57,13 @@ CREATE TABLE tickets (
     FOREIGN KEY(department_id) REFERENCES departments(id)
 );
 
+
 CREATE TABLE faqs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     question TEXT NOT NULL,
     answer TEXT NOT NULL
 );
+
 
 CREATE TABLE ticket_hashtags (
     ticket_id INTEGER NOT NULL,
@@ -67,14 +71,6 @@ CREATE TABLE ticket_hashtags (
     PRIMARY KEY (ticket_id, hashtag_id),
     FOREIGN KEY(ticket_id) REFERENCES tickets(id),
     FOREIGN KEY(hashtag_id) REFERENCES hashtags(id)
-);
-
-CREATE TABLE ticket_faqs (
-    ticket_id INTEGER NOT NULL,
-    faq_id INTEGER NOT NULL,
-    PRIMARY KEY (ticket_id, faq_id),
-    FOREIGN KEY(ticket_id) REFERENCES tickets(id),
-    FOREIGN KEY(faq_id) REFERENCES faqs(id)
 );
 
 CREATE TABLE ticket_logs (

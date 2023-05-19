@@ -100,3 +100,20 @@ form button {
 form div:not(:last-child) {
   margin-bottom: 20px;
 }
+
+.form-answer {
+  position: relative;
+}
+
+.add-faq {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 14px;
+}
+
+.add-faq a {
+  text-decoration: underline;
+  color: #0077b6;
+  font-weight: bold;
+}

@@ -1,22 +1,21 @@
-<?php function drawClient(Session $session){?>
-    <?php
-        session_start();
+<?php function drawClient(Session $session){
+    session_start();
 
-        if (!isset($_SESSION['userID'])) {
-            header("Location: ../pages/index.php");
-        }
+    if (!isset($_SESSION['userID'])) {
+        header("Location: ../pages/index.php");
+    }
 
-        require_once __DIR__ . '/../database/tickets.class.php';
-        require_once __DIR__ . '/../database/connection.db.php';
-        require_once __DIR__ . '/../database/departments.class.php';
-        require_once __DIR__ . '/../database/status.class.php';
+    require_once __DIR__ . '/../database/tickets.class.php';
+    require_once __DIR__ . '/../database/connection.db.php';
+    require_once __DIR__ . '/../database/departments.class.php';
+    require_once __DIR__ . '/../database/status.class.php';
 
-        $clientId = $session->getId();
+    $clientId = $session->getId();
 
-        $db = getDatabaseConnection();
-        $stmt = $db->prepare('SELECT * FROM tickets WHERE client_id = ?');
-        $stmt->execute([$clientId]);
-        $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $db = getDatabaseConnection();
+    $stmt = $db->prepare('SELECT * FROM tickets WHERE client_id = ?');
+    $stmt->execute([$clientId]);
+    $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
     <!DOCTYPE html>
@@ -87,8 +86,8 @@
                     <span class="ticket-updatedAt">Last update at: <?= $ticket['updated_at'] ?></span>
                 </div>
                 <div class="ticket-details">
-                    <p class="ticket-summary"><strong>Description:</strong> <?= $ticket['description'] ?></p>
-                    <p class="ticket-answer"><strong>Answer:</strong> <?= $ticket['answer'] ?></p>
+                    <p class="ticket-summary"><strong>Description:</strong> <?= nl2br(htmlspecialchars($ticket['description'])) ?></p>
+                    <p class="ticket-answer"><strong>Answer:</strong> <?= nl2br(htmlspecialchars($ticket['answer'])) ?></p>
                 </div>
             </div>
         <?php } ?>

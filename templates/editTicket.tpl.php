@@ -1,7 +1,4 @@
-<?php
-function drawEditTicket(Session $session, $title_error = '', $description_error = '') {
-    
-    session_start();
+<?php function drawEditTicket(Session $session, $title_error = '', $description_error = '') {
 
     if (!isset($_SESSION['userID'])) {
         header("Location: ../pages/index.php");
@@ -9,6 +6,7 @@ function drawEditTicket(Session $session, $title_error = '', $description_error 
     
     require_once '../database/connection.db.php';
     require_once '../database/tickets.class.php';
+    require_once '../database/faqs.class.php';
 
     $db = getDatabaseConnection();
 
@@ -111,9 +109,12 @@ function drawEditTicket(Session $session, $title_error = '', $description_error 
                             </select>
                         <?php endif; ?>
                     </div>
-                    <div>
+                    <div class="form-answer">
                         <?php if ($session->role !== 'client') : ?>
                             <label for="answer">Answer:</label>
+                            <div class="add-faq">
+                                <a href="../pages/faq.php?ticket_id=<?php echo $ticket->id; ?>">Add FAQ to answer</a>
+                            </div>
                             <textarea id="answer" name="answer"><?php echo htmlspecialchars($ticket->answer); ?></textarea>
                         <?php else: ?>
                             <label for="answer">Answer:</label>
@@ -131,8 +132,7 @@ function drawEditTicket(Session $session, $title_error = '', $description_error 
                     <button type="submit">Delete</button>
                 </form>
             </main>
+            <?php include '../templates/footer.tpl.php'; ?>
         </body>
     </html>
-<?php
-}
-?>
+<?php } ?>

@@ -167,5 +167,12 @@
         $stmt->bindValue(':ticketId', $ticketId, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    function addFaqToTicket($ticketId, $faqId) {
+        $db = getDatabaseConnection();
+
+        $stmt = $db->prepare('INSERT INTO ticket_faqs (ticket_id, faq_id) VALUES (?, ?)');
+        $stmt->execute(array($ticketId, $faqId));
+    }
 ?>
 

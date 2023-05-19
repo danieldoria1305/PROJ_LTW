@@ -68,4 +68,20 @@
         return $stmt->execute();
     }
 
+    function getFaqDataById(PDO $db, ?int $faqId): ?Faqs {
+        $stmt = $db->prepare('SELECT * FROM faqs WHERE id = :faqId');
+        $stmt->bindValue(':faqId', $faqId, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row === false) {
+            return null;
+        }
+
+        $id = isset($row['id']) ? (int) $row['id'] : null;
+        $question = isset($row['question']) ? $row['question'] : '';
+        $answer = isset($row['answer']) ? $row['answer'] : '';
+        return new Faqs($id, $question, $answer);
+}
+
 ?>

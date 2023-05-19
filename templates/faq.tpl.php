@@ -1,6 +1,4 @@
 <?php function drawFaq(Session $session) {
-    
-    session_start();
 
     if (!isset($_SESSION['userID'])) {
         header("Location: ../pages/index.php");
@@ -11,6 +9,7 @@
     
     $db = getDatabaseConnection();
     $faqs = getFaqData($db);
+    $fromEditTicket = isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'editTicket.php') !== false;
     ?>
     
     <!DOCTYPE html>
@@ -41,6 +40,9 @@
                             <h4><?php echo htmlspecialchars($faq->question); ?></h4>
                             <p><?php echo htmlspecialchars($faq->answer); ?></p>
                             <?php if ($session->role !== 'client') : ?>
+                                <?php if ($fromEditTicket) : ?>
+                                    <a href="../actions/action_answerWithFAQ.php?faq_id=<?php echo $faq->id; ?>&ticket_id=<?php echo $_GET['ticket_id']; ?>" class="use-faq-button">Use FAQ</a>
+                                <?php endif; ?>
                                 <a href="editFaq.php?id=<?php echo $faq->id; ?>" class="edit-button">Edit</a>
                             <?php endif; ?>
                         </li>
