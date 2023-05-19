@@ -2,7 +2,6 @@
 
     declare(strict_types=1);
 
-
     class TicketLogs {
         public ?int $id;
         public int $ticketId;
@@ -19,17 +18,6 @@
             $this->newValue = $newValue;
             $this->createdAt = date('Y-m-d H:i:s');
         }
-
-        public function createLog(PDO $db, int $ticketId, string $fieldName, string $oldValue, string $newValue): bool {
-            $stmt = $db->prepare('
-                INSERT INTO ticket_logs (ticket_id, field, old_value, new_value, created_at)
-                VALUES (?, ?, ?, ?, ?)
-            ');
-
-            $stmt->execute([$ticketId, $fieldName, $oldValue, $newValue, date('Y-m-d H:i:s')]);
-            return (bool) $stmt->rowCount();
-        }
-
 
         public function saveLog($db) {
             $stmt = $db->prepare("INSERT INTO ticket_logs (ticket_id, field, old_value, new_value, created_at) VALUES (?, ?, ?, ?, ?)");

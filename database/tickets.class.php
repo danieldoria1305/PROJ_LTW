@@ -123,7 +123,7 @@
         ');
 
         $stmt->bindValue(':agentId', $agentId, PDO::PARAM_INT);
-        $stmt->bindValue(':statusId', $statusId, PDO::PARAM_INT); // Update the status ID
+        $stmt->bindValue(':statusId', $statusId, PDO::PARAM_INT);
         $stmt->bindValue(':updatedAt', $updatedAt, PDO::PARAM_STR);
         $stmt->bindValue(':ticketId', $ticketId, PDO::PARAM_INT);
 
@@ -134,13 +134,6 @@
         $stmt = $db->prepare('DELETE FROM tickets WHERE id = :ticketId');
         $stmt->bindValue(':ticketId', $ticketId, PDO::PARAM_INT);
         return $stmt->execute();
-    }
-
-    function addFaqToTicket($ticketId, $faqId) {
-        $db = getDatabaseConnection();
-
-        $stmt = $db->prepare('INSERT INTO ticket_faqs (ticket_id, faq_id) VALUES (?, ?)');
-        $stmt->execute(array($ticketId, $faqId));
     }
 ?>
 

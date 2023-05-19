@@ -1,17 +1,14 @@
-/* Reset default browser styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* Body */
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
 }
 
-/* Header styling */
 header {
     background-color: #0077b6;
     color: #fff;
@@ -55,4 +52,35 @@ header nav a {
 .smaller {
     font-size: 0.5em;
     font-weight: lighter;
+}
+
+
+@media screen and (max-width: 600px) {
+    header {
+        flex-direction: column;
+        padding: 15px;
+        height: auto;
+    }
+
+    header h1 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    header nav {
+        margin-top: 10px;
+    }
+
+    header nav ul {
+        flex-wrap: wrap;
+    }
+
+    header nav li:not(:last-child) {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    header nav a {
+        font-size: 14px;
+    }
 }

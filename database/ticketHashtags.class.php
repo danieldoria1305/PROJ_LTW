@@ -26,8 +26,8 @@
     function deleteTicketHashtags(PDO $db, int $ticketId): bool {
         $stmt = $db->prepare('DELETE FROM ticket_hashtags WHERE ticket_id = ?');
         $stmt->execute([$ticketId]);
-    return (bool)$stmt->rowCount();
-}
+        return (bool)$stmt->rowCount();
+    }
 
     function getTicketHashtags(PDO $db, int $ticketId): array {
         $stmt = $db->prepare('SELECT * FROM ticket_hashtags WHERE ticket_id = :ticketId');

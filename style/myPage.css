@@ -5,6 +5,7 @@ main {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 50px auto;
     max-width: 500px;
+    margin-bottom: 100px;
 }
 
 main h2 {
@@ -82,4 +83,38 @@ input[type="submit"]:hover {
     font-size: 14px;
     color: #0077b6;
     padding: 0;
+}
+
+
+@media screen and (max-width: 600px) {
+    main {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    main h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+        font-size: 14px;
+        padding: 8px;
+        margin-bottom: 16px;
+        max-width: 100%;
+    }
+
+    input[type="submit"] {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    .password-field button {
+        top: 50%;
+        right: 14px;
+        transform: translateY(-50%);
+        font-size: 12px;
+    }
 }

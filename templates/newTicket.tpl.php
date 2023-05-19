@@ -18,7 +18,7 @@
                 <h1><a href="../pages/index.php"> Ticketly</a> <span class="smaller">New Ticket</span></h1>
                 <nav>
                     <ul>
-                        <li><a href="client.php">Back to Tickets</a></li>
+                        <li><a href="#" onclick="redirectToTickets('<?php echo $_SESSION['role']; ?>')">Back to Tickets</a></li>
                         <li><a href="../actions/action_logout.php">Log out</a></li>
                     </ul>
                 </nav>
@@ -65,6 +65,7 @@
                 </form>
             </main>
             <?php include '../templates/footer.tpl.php';?>
+            <script src="../javascript/redirect.js"></script>
         </body>
     </html>
 <?php }?>

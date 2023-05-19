@@ -178,3 +178,47 @@ section h2 {
     color: #999;
 }
 
+@media screen and (max-width: 600px) {
+    section {
+        margin-bottom: 20px;
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 10px;
+    }
+
+    .filters label {
+        margin-bottom: 5px;
+    }
+
+    .filters select,
+    #priority-filter,
+    #add-hashtag,
+    #add-department,
+    #add-status {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .filter-container > div {
+        position: static;
+        margin-top: 10px;
+    }
+
+    .button-group {
+        justify-content: flex-start;
+        margin-top: 5px;
+    }
+
+    .input-group {
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .input-group input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

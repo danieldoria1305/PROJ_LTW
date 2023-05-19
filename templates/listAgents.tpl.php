@@ -13,64 +13,14 @@
         <link rel="stylesheet" href="../style/listClients.css">
         <link rel="stylesheet" href="../style/header.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('.role-form').submit(function(event) {
-                    event.preventDefault();
-
-                    var form = $(this);
-                    var agentId = form.data('agent-id');
-                    var roleSelect = form.find('.role-select');
-                    var selectedRole = roleSelect.val();
-
-                    $.ajax({
-                        url: '../actions/action_editRole.php',
-                        type: 'POST',
-                        data: {
-                            clientId: agentId,
-                            role: selectedRole
-                        },
-                        success: function(response) {
-                            console.log(response);
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    });
-                });
-
-                $('.department-form').submit(function(event) {
-                    event.preventDefault();
-
-                    var form = $(this);
-                    var agentId = form.data('agent-id');
-                    var departmentSelect = form.find('.department-select');
-                    var selectedDepartment = departmentSelect.val();
-
-                    $.ajax({
-                        url: '../actions/action_editDepartment.php',
-                        type: 'POST',
-                        data: {
-                            clientId: agentId,
-                            departmentId: selectedDepartment
-                        },
-                        success: function(response) {
-                            console.log(response);
-                        },
-                        error: function(error) {
-                            console.log(error);
-                        }
-                    });
-                });
-            });
-        </script>
+        <script src="../javascript/listAgents.js"></script>
     </head>
     <body>
         <header>
             <h1>Ticketly <span class="smaller">Agents' List</span></h1>
             <nav>
                 <ul>
-                    <li><a href="../pages/client.php">Back to Tickets</a></li>
+                    <li><a href="#" onclick="redirectToTickets('<?php echo $_SESSION['role']; ?>')">Back to Tickets</a></li>
                     <li><a href="../actions/action_logout.php">Log out</a></li>
                 </ul>
             </nav>
@@ -137,6 +87,7 @@
         </main>
 
         <?php include '../templates/footer.tpl.php';?>
+        <script src="../javascript/redirect.js"></script>
 
     </body>
     </html>

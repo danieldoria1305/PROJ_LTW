@@ -8,6 +8,7 @@
     require_once '../database/tickets.class.php';
     require_once '../database/faqs.class.php';
     require_once '../database/ticketHashtags.class.php';
+    require_once '../pages/redirect.php';  
 
     $db = getDatabaseConnection();
 
@@ -39,7 +40,7 @@
                 <h1>Ticketly <span class="smaller">Edit Ticket</span></h1>
                 <nav>
                     <ul>
-                        <li><a href="client.php">Back to Tickets</a></li>
+                        <li><a href="#" onclick="redirectToTickets('<?php echo $_SESSION['role']; ?>')">Back to Tickets</a></li>
                         <li><a href="../actions/action_logout.php">Log out</a></li>
                     </ul>
                 </nav>
@@ -119,7 +120,10 @@
                             <textarea id="answer" name="answer"><?php echo htmlspecialchars($ticket->answer); ?></textarea>
                             <label for="hashtags">Hashtags:</label>
                             <div>
-                                <input type="text" id="hashtags-input" name="hashtags_input" placeholder="Type hashtags...">
+                                <div id="hashtags-top">
+                                    <input type="text" id="hashtags-input" name="hashtags_input" placeholder="Type hashtags...">
+                                    <button id="submit-hashtag" type="button">Add</button>
+                                </div>
                                 <div id="hashtags-autocomplete"></div>
                                 <div id="hashtags-container">
                                     <?php
@@ -130,7 +134,7 @@
                                     }
                                     ?>
                                 </div>
-                                <button id="submit-hashtag" type="button">Add</button>
+                                
                                 <input type="hidden" id="hashtags" name="hashtags" value="<?php echo implode(',', array_column($ticketHashtags, 'name')); ?>">
                             </div>
                         <?php else: ?>
@@ -152,6 +156,7 @@
             <?php include '../templates/footer.tpl.php'; ?>
             <script src="../javascript/hashtagAutocomplete.js"></script>
             <script src="../javascript/addHashtag.js"></script>
+            <script src="../javascript/redirect.js"></script>
         </body>
     </html>
 <?php } ?>

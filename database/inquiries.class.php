@@ -43,17 +43,4 @@
         return $inquiries;
     }
 
-    function getInquiryNameById(PDO $db, int $id): string {
-        $stmt = $db->prepare('SELECT * FROM inquiries WHERE id = :id');
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($row === false) {
-            return '';
-        }
-
-        return $row['name'];
-    }
-
 ?>
