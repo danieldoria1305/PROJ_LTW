@@ -8,6 +8,8 @@
     require_once __DIR__ . '/../database/connection.db.php';
     require_once __DIR__ . '/../database/departments.class.php';
     require_once __DIR__ . '/../database/status.class.php';
+    require_once __DIR__ . '/../database/hashtags.class.php';
+    require_once __DIR__ . '/../database/ticketHashtags.class.php';
 
     $clientId = $session->getId();
 
@@ -42,7 +44,27 @@
         <section id="my-tickets">
         <h2>Tickets</h2>
         <div class="filters">
-            <div id="department-filter" class="filter-container">
+            <div id="hashtag-filter-container" class="filter-container">
+                <label for="hashtag-filter">Hashtag:</label>
+                <select id="hashtag-filter">
+                    <option value="all">All</option>
+                    <?php
+                        $hashtags = getHashtags($db);
+                        foreach ($hashtags as $hashtag) {
+                            echo '<option value="' . $hashtag->id . '">' . $hashtag->name . '</option>';
+                        }
+                    ?>
+                </select>
+                <button id="add-hashtag" onclick="showAddHashtag()">+</button>
+                <div id="new-hashtag-form" style="display: none;">
+                    <input type="text" id="new-hashtag-input" placeholder="Enter new hashtag">
+                    <div class="button-group">
+                        <button onclick="addHashtag()">Add</button>
+                        <button onclick="cancelAddHashtag()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div id="department-filter-container" class="filter-container">
                 <label for="department-filter">Department:</label>
                 <select id="department-filter">
                     <option value="all">All</option>
@@ -62,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <div id="status-filter" class="filter-container">
+            <div id="status-filter-container" class="filter-container">
                 <label for="status-filter">Status:</label>
                 <select id="status-filter">
                     <option value="all">All</option>
@@ -94,7 +116,20 @@
         </div>
         <div class="ticket-container">
             <?php foreach ($tickets as $ticket) { ?>
-                <div class="ticket" data-department="<?= $ticket['department_id'] ?>" data-status="<?= $ticket['status_id'] ?>" data-priority="<?= $ticket['priority'] ?>">
+                <?php
+                    $ticketHashtags = getTicketHashtags($db, (int)$ticket['id']);
+                    $hashtagCount = count($ticketHashtags);
+                    $hashtagString = '';
+
+                    foreach ($ticketHashtags as $index => $hashtag) {
+                        $hashtagName = getHashtagsNameById($db, $hashtag->hashtagId);
+                        $hashtagString .= $hashtagName;
+                        if ($index < $hashtagCount - 1) {
+                            $hashtagString .= ', ';
+                        }
+                    }
+                ?>
+                <div class="ticket" data-department="<?= $ticket['department_id'] ?>" data-status="<?= $ticket['status_id'] ?>" data-priority="<?= $ticket['priority'] ?>" data-hashtags="<?= $hashtagString ?>">
                     <div class="ticket-top">
                         <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
                         <div class="edit-buttons">
@@ -112,8 +147,23 @@
                         <span class="ticket-updatedAt">Last update at: <?= $ticket['updated_at'] ?></span>
                     </div>
                     <div class="ticket-details">
-                    <p class="ticket-summary"><strong>Description:</strong> <?= nl2br(htmlspecialchars($ticket['description'])) ?></p>
-                    <p class="ticket-answer"><strong>Answer:</strong> <?= nl2br(htmlspecialchars($ticket['answer'])) ?></p>
+                        <p class="ticket-summary"><strong>Description:</strong> <?= nl2br(htmlspecialchars($ticket['description'])) ?></p>
+                        <p class="ticket-answer"><strong>Answer:</strong> <?= nl2br(htmlspecialchars($ticket['answer'])) ?></p>
+                    </div>
+                    <div class="ticket-info">
+                        <span class="ticket-hashtags">Hashtags:
+                            <?php
+                                $ticketHashtags = getTicketHashtags($db, $ticket['id']);
+                                $hashtagCount = count($ticketHashtags);
+                                foreach ($ticketHashtags as $index => $hashtag) {
+                                    $hashtagName = getHashtagsNameById($db, $hashtag->hashtagId);
+                                    echo $hashtagName;
+                                    if ($index < $hashtagCount - 1) {
+                                        echo ', ';
+                                    }
+                                }
+                            ?>
+                        </span>
                     </div>
                 </div>
             <?php } ?>
@@ -121,82 +171,8 @@
         </div>
     </main>
     <?php include '../templates/footer.tpl.php';?>
-
-    <script>
-        function showAddDepartment() {
-            var departmentForm = document.getElementById('new-department-form');
-            departmentForm.style.display = 'block';
-            var ticketContainer = document.querySelector('.ticket-container');
-            ticketContainer.classList.add('open-form');
-        }
-
-        function cancelAddDepartment() {
-            var departmentForm = document.getElementById('new-department-form');
-            departmentForm.style.display = 'none';
-            var newDepartmentInput = document.getElementById('new-department-input');
-            newDepartmentInput.value = '';
-
-            var statusForm = document.getElementById('new-status-form');
-            if (!statusForm.style.display || statusForm.style.display === 'none') {
-                var ticketContainer = document.querySelector('.ticket-container');
-                ticketContainer.classList.remove('open-form');
-            }
-        }
-
-        function addDepartment() {
-            var newDepartmentInput = document.getElementById('new-department-input');
-            var newDepartment = newDepartmentInput.value.trim();
-
-            if (newDepartment !== '') {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState === 4 && this.status === 200) {
-                        location.reload();
-                    }
-                };
-                xhttp.open('POST', '../actions/action_addDepartment.php', true);
-                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('newDepartment=' + newDepartment);
-            }
-        }
-
-        function showAddStatus() {
-            var statusForm = document.getElementById('new-status-form');
-            statusForm.style.display = 'block';
-            var ticketContainer = document.querySelector('.ticket-container');
-            ticketContainer.classList.add('open-form');
-        }
-
-        function cancelAddStatus() {
-            var statusForm = document.getElementById('new-status-form');
-            statusForm.style.display = 'none';
-            var newStatusInput = document.getElementById('new-status-input');
-            newStatusInput.value = '';
-
-            var departmentForm = document.getElementById('new-department-form');
-            if (!departmentForm.style.display || departmentForm.style.display === 'none') {
-                var ticketContainer = document.querySelector('.ticket-container');
-                ticketContainer.classList.remove('open-form');
-            }
-        }
-
-        function addStatus() {
-            var newStatusInput = document.getElementById('new-status-input');
-            var newStatus = newStatusInput.value.trim();
-
-            if (newStatus !== '') {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState === 4 && this.status === 200) {
-                        location.reload();
-                    }
-                };
-                xhttp.open('POST', '../actions/action_addStatus.php', true);
-                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('newStatus=' + newStatus);
-            }
-        }
-    </script>
+    <script src="../javascript/filterTickets.js"></script>
+    <script src="../javascript/filterForms.js"></script>
     </body>
     </html>
 

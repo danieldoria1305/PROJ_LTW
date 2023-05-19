@@ -14,7 +14,7 @@
 
     function createDepartment(PDO $db, $name) {
         $stmt = $db->prepare('
-            INSERT INTO departments (Name)
+            INSERT INTO departments (name)
             VALUES (?)
         ');
 

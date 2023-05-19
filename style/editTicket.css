@@ -38,6 +38,7 @@ form input[type="text"], form textarea {
     width: 100%;
     max-width: auto;
     transition: border-color 0.3s ease;
+    margin-bottom: 10px;
 }
   
 form textarea {
@@ -116,4 +117,20 @@ form div:not(:last-child) {
   text-decoration: underline;
   color: #0077b6;
   font-weight: bold;
+}
+
+.hashtag {
+    display: inline-block;
+    margin-right: 4px;
+    margin-top: -15px;
+}
+
+.remove-hashtag {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    color: #0077b6;
+    cursor: pointer;
+    margin-right: 4px;
+    margin-left: -8px;
 }

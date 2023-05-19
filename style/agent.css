@@ -29,13 +29,16 @@ section h2 {
 .filters {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     margin-bottom: 20px;
 }
 
 .filters label {
     font-size: 16px;
     margin-right: 5px;
+}
+
+.filters label:not(:first-of-type) {
+    margin-left: 20px;
 }
 
 .filters select {
@@ -46,10 +49,6 @@ section h2 {
     background-color: #fff;
 }
 
-#priority-filter {
-  margin-right: 20px;
-}
-
 .filters button {
   font-size: 16px;
   padding: 6px 15px;
@@ -57,37 +56,10 @@ section h2 {
   color: #fff;
   border-radius: 5px;
   border: none;
-  margin-left: 10px;
+  margin-left: 20px;
   cursor: pointer;
   white-space: nowrap;
   font-weight: bold;
-  margin-right: 10px;
-}
-
-#add-hashtag, #add-department, #add-status {
-  padding: 1px 5px;
-  margin-left: auto;
-  margin-right: 20px;
-}
-
-.filter-container {
-    position: relative;
-}
-
-.filter-container > div {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 10px;
-}
-
-.ticket-container {
-    margin-top: 10px;
-    position: relative;
-}
-
-.ticket-container.open-form {
-    margin-top: 70px;
 }
 
 .ticket {
@@ -130,7 +102,6 @@ section h2 {
 .ticket-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 5px;
 }
 
@@ -147,34 +118,6 @@ section h2 {
     font-size: small;
 }
 
-.button-group {
-    display: flex;
-    align-items: center;
-    justify-content:left;
+.edit-buttons {
+    margin-left: auto;
 }
-
-.button-group button {
-    font-size: small;
-    padding: 2px 8px;
-    margin-right: 5px;
-    margin-left: 0;
-    margin-top: 1px;
-}
-
-#new-hashtag-input,
-#new-department-input,
-#new-status-input {
-    font-size: smaller;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    margin-right: 10px;
-}
-
-#new-hashtag-input::placeholder,
-#new-department-input::placeholder,
-#new-status-input::placeholder {
-    color: #999;
-}
-

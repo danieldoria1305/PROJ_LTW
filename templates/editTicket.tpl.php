@@ -7,6 +7,7 @@
     require_once '../database/connection.db.php';
     require_once '../database/tickets.class.php';
     require_once '../database/faqs.class.php';
+    require_once '../database/ticketHashtags.class.php';
 
     $db = getDatabaseConnection();
 
@@ -45,7 +46,7 @@
             </header>
             <main>
                 <h2>Edit Ticket</h2>
-                <form action="../actions/action_editTicket.php" method="post">
+                <form action="../actions/action_editTicket.php?id=<?php echo $ticketId; ?>" method="post">
                     <div>
                         <label for="title">Title:</label>
                         <?php if ($session->role === 'client') : ?>
@@ -116,6 +117,22 @@
                                 <a href="../pages/faq.php?ticket_id=<?php echo $ticket->id; ?>">Add FAQ to answer</a>
                             </div>
                             <textarea id="answer" name="answer"><?php echo htmlspecialchars($ticket->answer); ?></textarea>
+                            <label for="hashtags">Hashtags:</label>
+                            <div>
+                                <input type="text" id="hashtags-input" name="hashtags_input" placeholder="Type hashtags...">
+                                <div id="hashtags-autocomplete"></div>
+                                <div id="hashtags-container">
+                                    <?php
+                                    $ticketHashtags = getTicketHashtags($db, $ticket->id);
+                                    foreach ($ticketHashtags as $hashtag) {
+                                        $hashtagName = getHashtagsNameById($db, $hashtag->hashtagId);
+                                        echo '<span class="hashtag">' . $hashtagName . '<button class="remove-hashtag" type="button">X</button></span>';
+                                    }
+                                    ?>
+                                </div>
+                                <button id="submit-hashtag" type="button">Add</button>
+                                <input type="hidden" id="hashtags" name="hashtags" value="<?php echo implode(',', array_column($ticketHashtags, 'name')); ?>">
+                            </div>
                         <?php else: ?>
                             <label for="answer">Answer:</label>
                             <span id="answer-display"><?php echo htmlspecialchars($ticket->answer); ?></span>
@@ -133,6 +150,8 @@
                 </form>
             </main>
             <?php include '../templates/footer.tpl.php'; ?>
+            <script src="../javascript/hashtagAutocomplete.js"></script>
+            <script src="../javascript/addHashtag.js"></script>
         </body>
     </html>
 <?php } ?>

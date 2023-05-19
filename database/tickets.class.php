@@ -31,21 +31,6 @@
             $this->updatedAt = $this->createdAt;
             $this->departmentId = $departmentId;
         }
-
-        public function getTicketHashtags() {
-            $db = getDatabaseConnection();
-
-            $stmt = $db->prepare('SELECT hashtags.id, hashtags.name FROM hashtags INNER JOIN ticket_hashtags ON hashtags.id = ticket_hashtags.hashtag_id WHERE ticket_hashtags.ticket_id = ?');
-            $stmt->bindParam(1, $this->id, PDO::PARAM_INT);
-            $stmt->execute();
-
-            $hashtags = [];
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $hashtags[] = $row;
-            }
-
-            return $hashtags;
-        }
     }
 
     function createTicket(PDO $db, $title, $description, $clientId, $departmentId = null, $priority = 'medium') {

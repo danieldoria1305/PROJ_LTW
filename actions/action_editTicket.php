@@ -8,6 +8,7 @@
     require_once '../utils/session.php';
     require_once '../templates/editTicket.tpl.php';
     require_once '../pages/redirect.php';
+    require_once '../database/ticketHashtags.class.php';
 
     $session = new Session();
 
@@ -111,6 +112,17 @@
             }
 
             updateTicket($db, $ticketId, $ticket->title, $ticket->description, $answer, $ticket->clientId, $_SESSION['userID'], $status_id, $priority, $department_id);
+            
+            $hashtags = isset($_POST['hashtags']) ? $_POST['hashtags'] : '';
+            $selectedHashtags = explode(',', $hashtags);
+
+            $del = deleteTicketHashtags($db, $ticketId);
+
+            foreach ($selectedHashtags as $selectedHashtag) {
+                $hashtagId = createHashtag($db, $selectedHashtag);
+                createTicketHashtag($db, $ticketId, $hashtagId);
+            }
+            
             redirectBasedOnRole($session->role);
             exit();
         }

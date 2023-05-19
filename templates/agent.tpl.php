@@ -8,7 +8,9 @@
     require_once __DIR__ . '/../database/connection.db.php';
     require_once __DIR__ . '/../database/departments.class.php';
     require_once __DIR__ . '/../database/status.class.php';
-
+    require_once __DIR__ . '/../database/hashtags.class.php';
+    require_once __DIR__ . '/../database/ticketHashtags.class.php';
+    
     $clientId = $session->getId();
 
     $db = getDatabaseConnection();
@@ -22,7 +24,7 @@
     <head>
     <meta charset="utf-8">
     <title>Ticketly - Agent Area</title>
-    <link rel="stylesheet" href="../style/client.css">
+    <link rel="stylesheet" href="../style/agent.css">
     <link rel="stylesheet" href="../style/header.css">
     </head>
     <body>
@@ -40,6 +42,16 @@
         <section id="my-tickets">
         <h2>Tickets</h2>
         <div class="filters">
+            <label for="hashtag-filter">Hashtag:</label>
+            <select id="hashtag-filter">
+                <option value="all">All</option>
+                <?php
+                    $hashtags = getHashtags($db);
+                    foreach ($hashtags as $hashtag) {
+                        echo '<option value="' . $hashtag->id . '">' . $hashtag->name . '</option>';
+                    }
+                ?>
+            </select>
             <label for="department-filter">Department:</label>
             <select id="department-filter">
                 <option value="all">All</option>
@@ -91,6 +103,21 @@
                 <div class="ticket-details">
                     <p class="ticket-summary"><strong>Description:</strong> <?= nl2br(htmlspecialchars($ticket['description'])) ?></p>
                     <p class="ticket-answer"><strong>Answer:</strong> <?= nl2br(htmlspecialchars($ticket['answer'])) ?></p>
+                </div>
+                <div class="ticket-info">
+                    <span class="ticket-hashtags">Hashtags:
+                        <?php
+                            $ticketHashtags = getTicketHashtags($db, $ticket['id']);
+                            $hashtagCount = count($ticketHashtags);
+                            foreach ($ticketHashtags as $index => $hashtag) {
+                                $hashtagName = getHashtagsNameById($db, $hashtag->hashtagId);
+                                echo $hashtagName;
+                                if ($index < $hashtagCount - 1) {
+                                    echo ', ';
+                                }
+                            }
+                        ?>
+                    </span>
                 </div>
             </div>
         <?php } ?>
