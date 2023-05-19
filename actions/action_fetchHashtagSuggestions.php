@@ -11,8 +11,7 @@
         echo json_encode($suggestions);
     }
 
-    function fetchHashtagSuggestions($db, $input)
-    {
+    function fetchHashtagSuggestions($db, $input) {
         $input = '%' . $input . '%';
         $query = 'SELECT name FROM hashtags WHERE name LIKE :input';
         $statement = $db->prepare($query);

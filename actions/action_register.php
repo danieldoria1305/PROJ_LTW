@@ -10,11 +10,6 @@
     $session = new Session();
     $session->init();
 
-    if (!isset($session->username)) {
-        header("Location: ../pages/index.php");
-        exit();
-    }
-
     $name_error = $username_error = $email_error = $password_error = '';
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -35,7 +30,7 @@
             $username_error = "Please enter a username!";
             $has_error = true;
         } elseif (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
-            $username_error = "Please enter valid characters only (characters or numbers)!";
+            $username_error = "Please enter valid characters only (letters or numbers)!";
             $has_error = true;
         } elseif (strlen($username) < 6 or strlen($username) > 15) {
             $username_error = "Username must be between 6 and 15 characters long!";
@@ -79,12 +74,13 @@
             $_SESSION['username'] = $user->username;
             $session->setId($user->id);
             $session->setUsername($user->username);
+
+            $csrf_token = bin2hex(random_bytes(32));
+            $_SESSION['csrf_token'] = $csrf_token;
+
             header('Location: ../pages/client.php');
-        } else {
-            drawRegister($session, $name_error, $username_error, $email_error, $password_error);
         }
     }
 
-    else include_once '../templates/register.tpl.php';
-
+    drawRegister($session, htmlspecialchars($name_error), htmlspecialchars($username_error), htmlspecialchars($email_error), htmlspecialchars($password_error));
 ?>

@@ -1,8 +1,8 @@
 <?php
     declare(strict_types=1);
 
-    require_once __DIR__ . '/../database/connection.db.php';
-    require_once __DIR__ . '/../database/hashtags.class.php';
+    require_once '/../database/connection.db.php';
+    require_once '/../database/hashtags.class.php';
     require_once '../utils/session.php';
 
     $session = new Session();

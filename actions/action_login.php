@@ -6,6 +6,7 @@
     require_once '../database/user.class.php';
     require_once '../utils/session.php';
     require_once '../pages/redirect.php';
+    require_once '../templates/login.tpl.php';
 
     $session = new Session();
     $session->init();
@@ -49,16 +50,15 @@
                 $session->setId($user->id);
                 $session->setUsername($user->username);
                 $session->setRole($user->role);
+
+                $csrf_token = bin2hex(random_bytes(32));
+                $_SESSION['csrf_token'] = $csrf_token;
+
                 redirectBasedOnRole($user->role);
             }
         }
 
-        if ($has_error) {
-            require_once '../templates/login.tpl.php';
-            drawLogin($session, $username_error, $email_error, $password_error);
-        }
-    } else {
-        require_once '../templates/login.tpl.php';
     }
 
+    drawLogin($session, htmlspecialchars($username_error), htmlspecialchars($email_error), htmlspecialchars($password_error));
 ?>
