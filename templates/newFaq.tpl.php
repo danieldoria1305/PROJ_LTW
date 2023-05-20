@@ -11,17 +11,12 @@
         <meta charset="UTF-8">
         <title>Ticketly - New FAQ</title>
         <link rel="stylesheet" href="../style/newTicket.css">
-        <link rel="stylesheet" href="../style/header.css">
     </head>
     <body>
-        <header>
-            <h1><a href="../pages/index.php"> Ticketly</a> <span class="smaller">New FAQ</span></h1>
-            <nav><ul>
-                <li><a href="faq.php">Back to FAQ</a></li>
-            </ul></nav>
-        </header>
+        <?php include '../templates/header.tpl.php';?>
 
         <main>
+            <a href="../pages/faq.php" class="back-button"><</a>
             <h2>FAQ</h2>
             <form id="faq-form" action="../actions/action_newFaq.php" method="post">
                 <label for="question">Question:</label>

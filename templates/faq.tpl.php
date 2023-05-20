@@ -19,18 +19,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Ticketly</title>
         <link rel="stylesheet" href="../style/index.css">
-        <link rel="stylesheet" href="../style/header.css">
     </head>
     <body>
-        <header>
-            <h1>Ticketly <span class="smaller">FAQ</span></h1>
-            <nav>
-                <ul>
-                    <li><a href="#" onclick="redirectToTickets('<?php echo $_SESSION['role']; ?>')">Back to Tickets</a></li>
-                    <li><a href="../actions/action_logout.php">Log out</a></li>
-                </ul>
-            </nav>
-        </header>
+        <?php include '../templates/header.tpl.php';?>
         <main>
             <section id="faq">
                 <h3>Frequently Asked Questions</h3>
@@ -56,7 +47,6 @@
             </section>
         </main>
         <?php include '../templates/footer.tpl.php';?>
-        <script src="../javascript/redirect.js"></script>
     </body>
     </html>
 

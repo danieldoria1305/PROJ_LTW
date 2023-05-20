@@ -20,6 +20,22 @@ main h2 {
     color: #0077b6;
 }
 
+.back-button {
+    background-color: #0077b6;
+    color: #fff;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: center;
+    margin-bottom: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 0;
+    align-self: flex-start;
+}
+
 table tr th {
     font-size: 18px;
     font-weight: 600;

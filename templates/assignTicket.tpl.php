@@ -13,7 +13,6 @@
         <meta charset="UTF-8">
         <title>Ticketly - Assign Agent</title>
         <link rel="stylesheet" href="../style/listClients.css">
-        <link rel="stylesheet" href="../style/header.css">
         <script>
             function confirmAssign() {
                 return confirm("Are you sure you want to assign this ticket to the selected agent?");
@@ -21,17 +20,9 @@
         </script>
     </head>
     <body>
-        <header>
-            <h1>Ticketly <span class="smaller">Assign Agent</span></h1>
-            <nav>
-                <ul>
-                    <li><a href="#" onclick="redirectToTickets('<?php echo $_SESSION['role']; ?>')">Back to Tickets</a></li>
-                    <li><a href="../actions/action_logout.php">Log out</a></li>
-                </ul>
-            </nav>
-        </header>
-
+        <?php include '../templates/header.tpl.php';?>
         <main>
+            <a href="../pages/tickets.php" class="back-button"><</a>
             <h2>Agents</h2>
             <section id="agents">
                 <table>
@@ -68,7 +59,6 @@
         </main>
 
         <?php include '../templates/footer.tpl.php';?>
-        <script src="../javascript/redirect.js"></script>
 
     </body>
     </html>

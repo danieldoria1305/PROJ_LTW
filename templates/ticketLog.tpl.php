@@ -13,21 +13,13 @@
         <meta charset="UTF-8">
         <title>Ticketly - Ticket Log</title>
         <link rel="stylesheet" href="../style/listClients.css">
-        <link rel="stylesheet" href="../style/header.css">
     </head>
 
     <body>
-        <header>
-            <h1>Ticketly <span class="smaller">Ticket Log</span></h1>
-            <nav>
-                <ul>
-                    <li><a href="#" onclick="redirectToTickets('<?php echo $_SESSION['role']; ?>')">Back to Tickets</a></li>
-                    <li><a href="../actions/action_logout.php">Log out</a></li>
-                </ul>
-            </nav>
-        </header>
+        <?php include '../templates/header.tpl.php';?>
 
         <main>
+            <a href="../pages/tickets.php" class="back-button"><</a>
             <h2>Ticket Log</h2>
             <section id="ticket-log">
                 <?php
@@ -64,7 +56,6 @@
         </main>
 
         <?php include '../templates/footer.tpl.php'; ?>
-        <script src="../javascript/redirect.js"></script>
 
     </body>
 

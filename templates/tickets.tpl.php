@@ -14,12 +14,16 @@
     $clientId = $session->getId();
     $db = getDatabaseConnection();
 
-    if ($session->role !== 'client'){
+    if ($session->role === 'admin'){
         $stmt = $db->prepare('SELECT * FROM tickets');
         $stmt->execute();
         $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } else {
+    } elseif ($session->role === 'client') {
         $stmt = $db->prepare('SELECT * FROM tickets WHERE client_id = ?');
+        $stmt->execute([$clientId]);
+        $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        $stmt = $db->prepare('SELECT * FROM tickets WHERE agent_id = ?');
         $stmt->execute([$clientId]);
         $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -142,9 +146,13 @@
                         <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
                         <div class="edit-buttons">
                             <a href="inquiries.php?id=<?= $ticket['id'] ?>" class="edit-button">Inquiries</a>
-                            <a href="assignTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Assign</a>
+                            <?php if ($session->role === 'admin') : ?>
+                                <a href="assignTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Assign</a>
+                            <?php endif; ?>
                             <a href="editTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Edit</a>
-                            <a href="ticketLog.php?id=<?= $ticket['id'] ?>" class="edit-button">Ticket log</a>
+                            <?php if ($session->role !== 'client') : ?>
+                                <a href="ticketLog.php?id=<?= $ticket['id'] ?>" class="edit-button">Ticket log</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="ticket-info">

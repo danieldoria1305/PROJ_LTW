@@ -10,20 +10,12 @@
     <meta charset="UTF-8">
     <title>Ticketly - Inquiries</title>
     <link rel="stylesheet" href="../style/inquiries.css">
-    <link rel="stylesheet" href="../style/header.css">
 </head>
 <body>
-    <header>
-        <h1>Ticketly <span class="smaller">Inquiries</span></h1>
-        <nav>
-            <ul>
-                <li><a href="#" onclick="redirectToTickets('<?php echo $_SESSION['role']; ?>')">Back to Tickets</a></li>
-                <li><a href="../actions/action_logout.php">Log out</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php include '../templates/header.tpl.php';?>
 
     <main>
+        <a href="../pages/tickets.php" class="back-button"><</a>
         <h2>Inquiries</h2>
         <section id="chat">
             <ul class="message-list">
@@ -59,7 +51,6 @@
     </main>
 
     <?php include '../templates/footer.tpl.php'; ?>
-    <script src="../javascript/redirect.js"></script>
 </body>
 </html>
 <?php } ?>

@@ -11,21 +11,11 @@
         <meta charset="UTF-8">
         <title>Ticketly - Agents' List</title>
         <link rel="stylesheet" href="../style/listClients.css">
-        <link rel="stylesheet" href="../style/header.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="../javascript/listAgents.js"></script>
     </head>
     <body>
-        <header>
-            <h1>Ticketly <span class="smaller">Agents' List</span></h1>
-            <nav>
-                <ul>
-                    <li><a href="#" onclick="redirectToTickets('<?php echo $_SESSION['role']; ?>')">Back to Tickets</a></li>
-                    <li><a href="../actions/action_logout.php">Log out</a></li>
-                </ul>
-            </nav>
-        </header>
-
+        <?php include '../templates/header.tpl.php';?>
         <main>
             <h2>Agents</h2>
             <section id="agents">
@@ -87,7 +77,6 @@
         </main>
 
         <?php include '../templates/footer.tpl.php';?>
-        <script src="../javascript/redirect.js"></script>
 
     </body>
     </html>

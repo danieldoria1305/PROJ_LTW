@@ -11,19 +11,11 @@
             <meta charset="utf-8">
             <title>Ticketly - New Ticket</title>
             <link rel="stylesheet" href="../style/newTicket.css">
-            <link rel="stylesheet" href="../style/header.css">
         </head>
         <body>
-            <header>
-                <h1><a href="../pages/index.php"> Ticketly</a> <span class="smaller">New Ticket</span></h1>
-                <nav>
-                    <ul>
-                        <li><a href="#" onclick="redirectToTickets('<?php echo $_SESSION['role']; ?>')">Back to Tickets</a></li>
-                        <li><a href="../actions/action_logout.php">Log out</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <?php include '../templates/header.tpl.php';?>
             <main>
+                <a href="../pages/tickets.php" class="back-button"><</a>
                 <h2>New Ticket</h2>
                 <form action="../actions/action_createTicket.php" method="post">
                     <div>
@@ -44,6 +36,7 @@
                     <div class="form-row">
                         <label for="department">Department:</label>
                         <select id="department" name="department_id">
+                            <option value="0">No Department</option>;
                             <?php
                             include_once '../database/departments.class.php';
                             include_once '../database/connection.db.php';
@@ -65,7 +58,6 @@
                 </form>
             </main>
             <?php include '../templates/footer.tpl.php';?>
-            <script src="../javascript/redirect.js"></script>
         </body>
     </html>
 <?php }?>

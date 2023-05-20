@@ -8,7 +8,6 @@
     require_once '../database/tickets.class.php';
     require_once '../database/faqs.class.php';
     require_once '../database/ticketHashtags.class.php';
-    require_once '../pages/redirect.php';  
 
     $db = getDatabaseConnection();
 
@@ -33,19 +32,16 @@
             <meta charset="utf-8">
             <title>Ticketly - Edit Ticket</title>
             <link rel="stylesheet" href="../style/editTicket.css">
-            <link rel="stylesheet" href="../style/header.css">
+            <script>
+            function confirmDelete() {
+                return confirm("Are you sure you want to delete this ticket?");
+            }
+        </script>
         </head>
         <body>
-            <header>
-                <h1>Ticketly <span class="smaller">Edit Ticket</span></h1>
-                <nav>
-                    <ul>
-                        <li><a href="#" onclick="redirectToTickets('<?php echo $_SESSION['role']; ?>')">Back to Tickets</a></li>
-                        <li><a href="../actions/action_logout.php">Log out</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <?php include '../templates/header.tpl.php';?>
             <main>
+                <a href="../pages/tickets.php" class="back-button"><</a>
                 <h2>Edit Ticket</h2>
                 <form action="../actions/action_editTicket.php?id=<?php echo $ticketId; ?>" method="post">
                     <div>
@@ -148,7 +144,7 @@
                         <input type="submit" value="Save Changes">
                     </div>
                 </form>
-                <form id="delete-form" action="../actions/action_deleteTicket.php" method="post">
+                <form id="delete-form" action="../actions/action_deleteTicket.php" method="post" onsubmit="return confirmDelete();">
                     <input type="hidden" name="ticket_id" value="<?php echo $ticket->id; ?>">
                     <button type="submit">Delete</button>
                 </form>
@@ -156,7 +152,6 @@
             <?php include '../templates/footer.tpl.php'; ?>
             <script src="../javascript/hashtagAutocomplete.js"></script>
             <script src="../javascript/addHashtag.js"></script>
-            <script src="../javascript/redirect.js"></script>
         </body>
     </html>
 <?php } ?>

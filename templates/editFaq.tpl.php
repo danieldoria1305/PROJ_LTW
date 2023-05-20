@@ -32,17 +32,16 @@
         <meta charset="UTF-8">
         <title>Ticketly - Edit FAQ</title>
         <link rel="stylesheet" href="../style/newTicket.css">
-        <link rel="stylesheet" href="../style/header.css">
+        <script>
+            function confirmDelete() {
+                return confirm("Are you sure you want to delete this FAQ?");
+            }
+        </script>
     </head>
     <body>
-        <header>
-            <h1><a href="../pages/index.php"> Ticketly</a> <span class="smaller">Edit FAQ</span></h1>
-            <nav><ul>
-                <li><a href="faq.php">Back to FAQ</a></li>
-            </ul></nav>
-        </header>
-
+        <?php include '../templates/header.tpl.php';?>
         <main>
+            <a href="../pages/faq.php" class="back-button"><</a>
             <h2>Edit FAQ</h2>
             <form id="faq-form" action="../actions/action_editFaq.php" method="post">
                 <input type="hidden" name="faq_id" value="<?php echo $faq->id; ?>">
@@ -59,7 +58,7 @@
                 <?php endif; ?>
                 <button type="submit">Update</button>
             </form>
-            <form id="delete-form" action="../actions/action_deleteFaq.php" method="post">
+            <form id="delete-form" action="../actions/action_deleteFaq.php" method="post" onsubmit="return confirmDelete();">
                 <input type="hidden" name="faq_id" value="<?php echo $faq->id; ?>">
                 <button type="submit">Delete</button>
             </form>

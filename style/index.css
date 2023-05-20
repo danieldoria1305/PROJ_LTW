@@ -47,7 +47,7 @@
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-#faq li .edit-button {
+#faq li .edit-button, .use-faq-button {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -57,6 +57,10 @@
     border-radius: 5px;
     text-decoration: none;
     font-size: x-small;
+}
+
+#faq li .use-faq-button {
+    margin-right: 35px;
 }
 
 #faq h4 {
