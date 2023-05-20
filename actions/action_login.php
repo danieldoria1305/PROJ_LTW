@@ -21,11 +21,13 @@
 
         if (empty($username_or_email)) {
             $username_error = "Please enter your username or e-mail!";
+            $session->addMessage('error', $username_error);
             $has_error = true;
         }
 
         if (empty($password)) {
             $password_error = "Please enter your password!";
+            $session->addMessage('error', $password_error);
             $has_error = true;
         }
 
@@ -38,9 +40,11 @@
 
             if (!$user) {
                 $username_error = "User not found!";
+                $session->addMessage('error', $username_error);
                 $has_error = true;
             } elseif (!getUserWithPassword($db, $user->username, $password)) {
                 $password_error = "Incorrect password!";
+                $session->addMessage('error', $password_error);
                 $has_error = true;
             } else {
                 $_SESSION['userID'] = $user->id;

@@ -38,17 +38,21 @@
 
             if (empty($title)) {
                 $title_error = "Please enter a title!";
+                $session->addMessage('error', $title_error);
                 $has_error = true;
             } elseif (strlen($title) < 5 || strlen($title) > 100) {
                 $title_error = "Title must be between 5 and 100 characters long!";
+                $session->addMessage('error', $title_error);
                 $has_error = true;
             }
 
             if (empty($description)) {
                 $description_error = "Please enter a description!";
+                $session->addMessage('error', $description_error);
                 $has_error = true;
             } elseif (strlen($description) < 10 || strlen($description) > 500) {
                 $description_error = "Description must be between 10 and 500 characters long!";
+                $session->addMessage('error', $description_error);
                 $has_error = true;
             }
 

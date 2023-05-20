@@ -25,17 +25,21 @@
 
         if (empty($question)) {
             $question_error = "Please enter a question!";
+            $session->addMessage('error', $question_error);
             $has_error = true;
         } elseif (strlen($question) < 15 or strlen($question) > 80) {
             $question_error = "Question must be between 15 and 80 characters long!";
+            $session->addMessage('error', $question_error);
             $has_error = true;
         }
 
         if (empty($answer)) {
             $answer_error = "Please enter an answer!";
+            $session->addMessage('error', $answer_error);
             $has_error = true;
         } elseif (strlen($answer) < 15 or strlen($answer) > 250) {
             $answer_error = "Answer must be between 15 and 250 characters long!";
+            $session->addMessage('error', $answer_error);
             $has_error = true;
         }
 

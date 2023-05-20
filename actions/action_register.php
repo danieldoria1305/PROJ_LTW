@@ -23,33 +23,41 @@
 
         if (empty($name)) {
             $name_error = "Please enter your name!";
+            $session->addMessage('error', $name_error);
             $has_error = true;
         }
 
         if (empty($username)) {
             $username_error = "Please enter a username!";
+            $session->addMessage('error', $username_error);
             $has_error = true;
         } elseif (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
             $username_error = "Please enter valid characters only (letters or numbers)!";
+            $session->addMessage('error', $username_error);
             $has_error = true;
         } elseif (strlen($username) < 6 or strlen($username) > 15) {
             $username_error = "Username must be between 6 and 15 characters long!";
+            $session->addMessage('error', $username_error);
             $has_error = true;
         }
 
         if (empty($email)) {
             $email_error = "Please enter an email!";
+            $session->addMessage('error', $email_error);
             $has_error = true;
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $email_error = "Please enter a valid email!";
+            $session->addMessage('error', $email_error);
             $has_error = true;
         }
 
         if (empty($password)) {
             $password_error = "Please enter a password!";
+            $session->addMessage('error', $password_error);
             $has_error = true;
         } elseif (strlen($password) < 6 or strlen($password) > 15) {
             $password_error = "Password must be between 6 and 15 characters long!";
+            $session->addMessage('error', $password_error);
             $has_error = true;
         }
 
@@ -58,11 +66,13 @@
 
             if (duplicateUsername($db, $username)) {
                 $username_error = "Username already exists!";
+                $session->addMessage('error', $username_error);
                 $has_error = true;
             }
 
             if (duplicateEmail($db, $email)) {
                 $email_error = "Email already in use!";
+                $session->addMessage('error', $email_error);
                 $has_error = true;
             }
         }
