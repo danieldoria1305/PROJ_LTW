@@ -7,7 +7,6 @@
     require_once '../database/ticketLogs.class.php';
     require_once '../utils/session.php';
     require_once '../templates/editTicket.tpl.php';
-    require_once '../pages/redirect.php';
     require_once '../database/ticketHashtags.class.php';
 
     $session = new Session();
@@ -123,7 +122,7 @@
                 createTicketHashtag($db, $ticketId, $hashtagId);
             }
             
-            redirectBasedOnRole($session->role);
+            header("Location: ../pages/tickets.php");
             exit();
         }
     }

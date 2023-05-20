@@ -5,7 +5,6 @@
     require_once '../database/connection.db.php';
     require_once '../database/tickets.class.php';
     require_once '../utils/session.php';
-    require_once '../pages/redirect.php';
 
     $session = new Session();
 
@@ -21,7 +20,7 @@
         $db = getDatabaseConnection();
 
         deleteTicket($db, $ticketId);
-        redirectBasedOnRole($_SESSION['role']);
+        header("Location: ../pages/tickets.php");
         
         exit();
     }

@@ -15,6 +15,7 @@
         <title>Ticketly</title>
         <link rel="stylesheet" href="../style/index.css">
         <link rel="stylesheet" href="../style/header.css">
+        
     </head>
 
     <body>

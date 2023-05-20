@@ -7,7 +7,6 @@
     require_once '../templates/assignTicket.tpl.php';
     require_once '../database/tickets.class.php';
     require_once '../database/ticketLogs.class.php';
-    require_once '../pages/redirect.php';
 
     $session = new Session();
 
@@ -35,7 +34,7 @@
             $log = new TicketLogs((int)$ticketID, (int)$ticketID, 'agentId', (string)$previousAgentID, (string)$agentID);
             $log->saveLog($db);
 
-            redirectBasedOnRole($_SESSION['role']);
+            header("Location: ../pages/tickets.php");
             exit();
         }
     }

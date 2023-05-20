@@ -75,10 +75,12 @@
             $session->setId($user->id);
             $session->setUsername($user->username);
 
+            $_SESSION['role'] = "client";
+
             $csrf_token = bin2hex(random_bytes(32));
             $_SESSION['csrf_token'] = $csrf_token;
 
-            header('Location: ../pages/client.php');
+            header('Location: ../pages/tickets.php');
         }
     }
 

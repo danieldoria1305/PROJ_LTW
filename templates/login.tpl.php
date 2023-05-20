@@ -37,7 +37,7 @@
                 <button type="submit">Submit</button>
 
                 <div class="NoAccount">
-                    <p>Don't have an account? <a href="register.php">Register</a></p>
+                    <p>Don't have an account? <a href="../pages/register.php">Register</a></p>
                 </div>
 
             </form>

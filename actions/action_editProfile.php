@@ -6,7 +6,6 @@
     require_once '../database/user.class.php';
     require_once '../utils/session.php';
     require_once '../templates/myPage.tpl.php';
-    require_once '../pages/redirect.php';
 
     $session = new Session();
 
@@ -77,7 +76,7 @@
 
         if (!$has_error) {
             $user = updateUser($db, $currentUser->id, $username, $password, $name, $email);
-            redirectBasedOnRole($_SESSION['role']);
+            header("Location: ../pages/tickets.php");
         }
     }
 

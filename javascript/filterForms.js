@@ -1,8 +1,8 @@
-function showAddHashtag() {
-    var hashtagForm = document.getElementById("new-hashtag-form");
-    hashtagForm.style.display = "block";
-    var ticketContainer = document.querySelector(".ticket-container");
-    ticketContainer.classList.add("open-form");
+function showFilterForm(filterFormName) {
+  var hashtagForm = document.getElementById("new-" + filterFormName + "-form");
+  hashtagForm.style.display = "block";
+  var ticketContainer = document.querySelector(".ticket-container");
+  ticketContainer.classList.add("open-form");
 }
 
 function cancelAddHashtag() {
@@ -13,8 +13,7 @@ function cancelAddHashtag() {
 
     var statusForm = document.getElementById("new-status-form");
     var departmentForm = document.getElementById("new-department-form");
-    if (
-        (!statusForm.style.display || statusForm.style.display === "none") &&
+    if ((!statusForm.style.display || statusForm.style.display === "none") &&
         (!departmentForm.style.display || departmentForm.style.display === "none")
     ) {
         var ticketContainer = document.querySelector(".ticket-container");
@@ -37,14 +36,6 @@ function addHashtag() {
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("newHashtag=" + newHashtag);
     }
-}
-
-
-function showAddDepartment() {
-    var departmentForm = document.getElementById("new-department-form");
-    departmentForm.style.display = "block";
-    var ticketContainer = document.querySelector(".ticket-container");
-    ticketContainer.classList.add("open-form");
 }
 
 function cancelAddDepartment() {
@@ -79,14 +70,6 @@ function addDepartment() {
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("newDepartment=" + newDepartment);
     }
-}
-
-
-function showAddStatus() {
-    var statusForm = document.getElementById("new-status-form");
-    statusForm.style.display = "block";
-    var ticketContainer = document.querySelector(".ticket-container");
-    ticketContainer.classList.add("open-form");
 }
 
 function cancelAddStatus() {

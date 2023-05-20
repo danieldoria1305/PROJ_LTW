@@ -4,6 +4,7 @@
     require_once '/../database/connection.db.php';
     require_once '/../database/hashtags.class.php';
     require_once '../utils/session.php';
+    require_once '../templates/tickets.tpl.php';
 
     $session = new Session();
 
@@ -18,10 +19,10 @@
         if ($newHashtag !== '') {
             $db = getDatabaseConnection();
             $hashtagId = createHashtag($db, $newHashtag);
-            header('Location: ../pages/admin.php');
+            header('Location: ../pages/tickets.php');
             exit();
         }
     }
-    drawAdmin($session);
+    drawTickets($session);
 
 ?>

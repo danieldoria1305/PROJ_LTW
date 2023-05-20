@@ -50,7 +50,7 @@
             $log = new TicketLogs((int)$ticketId, (int)$ticketId, 'created_at', '', date('Y-m-d H:i:s'));
             $log->saveLog($db);
 
-            header('Location: ../pages/client.php');
+            header('Location: ../pages/tickets.php');
             exit();
         }
     }

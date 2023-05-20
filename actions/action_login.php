@@ -5,7 +5,6 @@
     require_once '../database/connection.db.php';
     require_once '../database/user.class.php';
     require_once '../utils/session.php';
-    require_once '../pages/redirect.php';
     require_once '../templates/login.tpl.php';
 
     $session = new Session();
@@ -54,7 +53,7 @@
                 $csrf_token = bin2hex(random_bytes(32));
                 $_SESSION['csrf_token'] = $csrf_token;
 
-                redirectBasedOnRole($user->role);
+                header("Location: ../pages/tickets.php");
             }
         }
 
