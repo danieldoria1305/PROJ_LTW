@@ -57,7 +57,7 @@ label {
     letter-spacing: 1px;
     align-items:self-start;
     color: #0077b6;
-    flex-basis: 200px; /* Adjust the width as needed */
+    flex-basis: 200px;
     text-align: right;
 }
 
@@ -67,36 +67,17 @@ label {
     margin-bottom: 20px;
 }
 
-select, input[type="submit"] {
+select{
     font-size: 16px;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
     transition: border-color 0.3s ease;
-    flex: 1;
 }
 
 select {
-    margin-right: 10px;
+    margin-right: 5px;
     max-width: 200px;
-}
-
-input[type="submit"] {
-    background-color: #0077b6;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    align-self: center;
-    flex: 1;
-    max-width: 50%;
-    font-size: smaller;
-    padding: 5px;
-    margin-bottom: 10px;
-}
-
-input[type="submit"]:hover {
-    background-color: #005b8a; /* Darker shade on hover */
 }
 
 button {
@@ -111,7 +92,6 @@ button {
     border: none;
     cursor: pointer;
 }
-
 
 @media screen and (max-width: 600px) {
     main {
@@ -136,12 +116,12 @@ button {
     }
 
     select,
-    input[type="submit"] {
+    button[type="submit"] {
         font-size: 14px;
         padding: 8px;
     }
 
-    input[type="submit"] {
+    button[type="submit"] {
         max-width: 100%;
         margin-bottom: 20px;
     }

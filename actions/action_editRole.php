@@ -12,7 +12,10 @@
         updateUserRole($db, $user->id, $role);
     }
 
-    header('Location: ../pages/tickets.php');
+    if($role == 'client')
+        header('Location: ../pages/listClients.php');
+
+    else header('Location: ../pages/listAgents.php');
 
     exit();
 ?>

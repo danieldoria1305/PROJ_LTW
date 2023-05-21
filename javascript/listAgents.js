@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $(".role-form").submit(function (event) {
-        event.preventDefault();
 
         var form = $(this);
         var agentId = form.data("agent-id");
@@ -24,7 +23,6 @@ $(document).ready(function () {
     });
 
     $(".department-form").submit(function (event) {
-        event.preventDefault();
 
         var form = $(this);
         var agentId = form.data("agent-id");

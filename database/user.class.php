@@ -221,4 +221,10 @@
         return $stmt->execute([$departmentId, $id]);
     }
 
+    function deleteUser(PDO $db, ?int $userId): bool {
+        $stmt = $db->prepare('DELETE FROM users WHERE id = :userId');
+        $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
 ?>

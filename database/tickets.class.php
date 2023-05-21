@@ -67,7 +67,7 @@
         return new Tickets($id, $title, $description, $answer, $clientId, $agentId, $statusId, $priority, $departmentId);
     }
 
-    function updateTicket(PDO $db, int $ticketId, string $title, string $description, string $answer, int $clientId, int $agentId, int $statusId, string $priority, int $departmentId): bool {
+    function updateTicket(PDO $db, int $ticketId, string $title, string $description, ?string $answer, int $clientId, ?int $agentId, int $statusId, string $priority, ?int $departmentId): bool {
         $updatedAt = date('Y-m-d H:i:s');
         $stmt = $db->prepare('
             UPDATE tickets
@@ -114,7 +114,7 @@
 
     function updateTicketAgent(PDO $db, int $ticketId, int $agentId): bool {
         $updatedAt = date('Y-m-d H:i:s');
-        $statusId = $agentId !== null ? 2 : 1; // Change the status ID based on the agent ID
+        $statusId = $agentId !== null ? 2 : 1;
 
         $stmt = $db->prepare('
             UPDATE tickets
@@ -133,6 +133,18 @@
     function deleteTicket(PDO $db, ?int $ticketId): bool {
         $stmt = $db->prepare('DELETE FROM tickets WHERE id = :ticketId');
         $stmt->bindValue(':ticketId', $ticketId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    function deleteUserTickets(PDO $db, ?int $userId): bool {
+        $stmt = $db->prepare('DELETE FROM tickets WHERE client_id = :userId');
+        $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    function unassignTickets(PDO $db, ?int $agentId): bool {
+        $stmt = $db->prepare('UPDATE tickets SET agent_id = NULL, status_id = 1 WHERE agent_id = :agentId');
+        $stmt->bindValue(':agentId', $agentId, PDO::PARAM_INT);
         return $stmt->execute();
     }
 ?>

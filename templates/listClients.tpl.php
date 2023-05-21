@@ -11,6 +11,11 @@
         <meta charset="UTF-8">
         <title>Ticketly - CLients' List</title>
         <link rel="stylesheet" href="../style/listClients.css">
+        <script>
+            function confirmDelete() {
+                return confirm("Are you sure you want to delete this client?");
+            }
+        </script>
     </head>
     <body>
         <?php include '../templates/header.tpl.php';?>
@@ -24,6 +29,7 @@
                         <th>Username</th>
                         <th>E-mail</th>
                         <th>Role</th>
+                        <th>Delete</th>
                     </tr>
                     <?php
                         require_once '../database/connection.db.php';
@@ -46,7 +52,14 @@
                                         <option value="agent" <?php if ($client->role == 'agent') echo 'selected' ?>>Agent</option>
                                         <option value="admin" <?php if ($client->role == 'admin') echo 'selected' ?>>Admin</option>
                                     </select>
-                                    <input type="submit" value="Save">
+                                    <button type="submit">Save</button>
+                                </form>
+                                
+                            </td>
+                            <td>
+                                <form id="delete-form" method="post" action="../actions/action_deleteClient.php" onsubmit="return confirmDelete();">
+                                    <input type="hidden" name="userId" value="<?php echo $client->id ?>">
+                                    <button type="submit">Delete Client</button>
                                 </form>
                             </td>
                         </tr>

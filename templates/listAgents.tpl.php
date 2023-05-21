@@ -13,6 +13,11 @@
         <link rel="stylesheet" href="../style/listClients.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="../javascript/listAgents.js"></script>
+        <script>
+            function confirmDelete() {
+                return confirm("Are you sure you want to delete this agent?");
+            }
+        </script>
     </head>
     <body>
         <?php include '../templates/header.tpl.php';?>
@@ -26,6 +31,7 @@
                         <th>E-mail</th>
                         <th>Role</th>
                         <th>Department</th>
+                        <th>Delete</th>
                     </tr>
                     <?php
                         require_once '../database/connection.db.php';
@@ -49,7 +55,7 @@
                                         <option value="agent" <?php if ($agent->role == 'agent') echo 'selected' ?>>Agent</option>
                                         <option value="admin" <?php if ($agent->role == 'admin') echo 'selected' ?>>Admin</option>
                                     </select>
-                                    <input type="submit" value="Save">
+                                    <button type="submit">Save</button>
                                 </form>
                             </td>
                             <td>
@@ -67,8 +73,14 @@
                                     }
                                 ?> 
                                 </select>
-                                <input type="submit" value="Save">
+                                <button type="submit">Save</button>
                             </form>
+                            </td>
+                            <td>
+                                <form id="delete-form" method="post" action="../actions/action_deleteAgent.php" onsubmit="return confirmDelete();">
+                                    <input type="hidden" name="agentId" value="<?php echo $agent->id ?>">
+                                    <button type="submit">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     <?php } ?>
