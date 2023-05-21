@@ -144,6 +144,11 @@ section h2 {
     font-size: small;
 }
 
+.unanswered-inquiries-button {
+    background-color: rgb(222, 0, 0);
+    color: #fff;
+}
+
 .button-group {
     display: flex;
     align-items: center;

@@ -35,7 +35,7 @@
                         $isUserMessage = ($userRole === 'client');
                 ?>
                 <li class="<?= $isUserMessage ? 'user-message' : 'agent-message' ?>">
-                    <span class="message-sender"><?= $isUserMessage ? 'Client' : 'Agent' ?></span>
+                    <span class="message-sender"><?= $isUserMessage ? 'Client' : 'Our Team' ?></span>
                     <span class="message-content"><?= $message ?></span>
                 </li>
                 <?php } ?>

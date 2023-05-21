@@ -10,6 +10,7 @@
     require_once __DIR__ . '/../database/status.class.php';
     require_once __DIR__ . '/../database/hashtags.class.php';
     require_once __DIR__ . '/../database/ticketHashtags.class.php';
+    require_once __DIR__ . '/../database/inquiries.class.php';
 
     $clientId = $session->getId();
     $db = getDatabaseConnection();
@@ -144,8 +145,13 @@
                 <div class="ticket" data-department="<?= $ticket['department_id'] ?>" data-status="<?= $ticket['status_id'] ?>" data-priority="<?= $ticket['priority'] ?>" data-hashtags="<?= $hashtagString ?>">
                     <div class="ticket-top">
                         <h3 class="ticket-subject"><?= $ticket['title'] ?></h3>
+                        <?php
+                            $ticketId = $ticket['id'];
+                            $unansweredMessages = hasUnansweredMessages($db, $ticketId, $session->role);
+                            $inquiriesButtonClass = $unansweredMessages ? 'unanswered-inquiries-button' : '';
+                        ?>
                         <div class="edit-buttons">
-                            <a href="inquiries.php?id=<?= $ticket['id'] ?>" class="edit-button">Inquiries</a>
+                            <a href="inquiries.php?id=<?= $ticket['id'] ?>" class="edit-button <?= $inquiriesButtonClass ?>">Inquiries</a>
                             <?php if ($session->role === 'admin') : ?>
                                 <a href="assignTicket.php?id=<?= $ticket['id'] ?>" class="edit-button">Assign</a>
                             <?php endif; ?>

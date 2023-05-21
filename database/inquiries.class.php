@@ -43,4 +43,17 @@
         return $inquiries;
     }
 
+    function hasUnansweredMessages($db, $ticketId, $userRole) {
+        $stmt = $db->prepare('SELECT user_role FROM inquiries WHERE ticket_id = ? ORDER BY id DESC LIMIT 1');
+        $stmt->execute([$ticketId]);
+        $lastInquiry = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($lastInquiry && (($userRole === 'client' && $lastInquiry['user_role'] !== 'client') ||
+            ($userRole !== 'client' && $lastInquiry['user_role'] === 'client'))) {
+            return true;
+        }
+
+        return false;
+    }
+
 ?>
