@@ -48,7 +48,7 @@
                             <td>
                                 <form method="POST" action="../actions/action_assignTicket.php" onsubmit="return confirmAssign();">
                                     <input type="hidden" name="ticket_id" value="<?php echo $_GET['id']; ?>">
-                                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>"> 
                                     <input type="hidden" name="agent_id" value="<?php echo $agent->id; ?>">
                                     <button type="submit" name="assign_ticket">Assign</button>
                                 </form>

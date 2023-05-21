@@ -1,16 +1,18 @@
-<?php function drawEditFaq(Session $session, $question_error = '', $answer_error = '') {
-    
+<?php
+function drawEditFaq(Session $session, $question_error = '', $answer_error = '')
+{
     session_start();
 
     if (!isset($_SESSION['userID'])) {
         header("Location: ../pages/index.php");
+        exit();
     }
 
     require_once '../database/connection.db.php';
     require_once '../database/faqs.class.php';
-    
+
     $db = getDatabaseConnection();
-    
+
     if (isset($_POST['faq_id'])) {
         $faqId = (int)$_POST['faq_id'];
     } elseif (isset($_GET['id'])) {
@@ -18,9 +20,9 @@
     } else {
         exit('Invalid FAQ ID');
     }
-    
-    $faq = getFaqEditData($db, (int)$faqId);
-    
+
+    $faq = getFaqEditData($db, $faqId);
+
     if (empty($faq)) {
         exit('FAQ not found');
     }
@@ -50,7 +52,7 @@
                 <?php if (!empty($question_error)) : ?>
                     <div class="error"><?php echo htmlspecialchars($question_error); ?></div>
                 <?php endif; ?>
-                
+
                 <label for="answer">Answer:</label>
                 <textarea type="text" id="answer" name="answer" required><?php echo $faq->answer; ?></textarea>
                 <?php if (!empty($answer_error)) : ?>
@@ -66,5 +68,5 @@
         <?php include '../templates/footer.tpl.php';?>
     </body>
     </html>
-    
+
 <?php } ?>

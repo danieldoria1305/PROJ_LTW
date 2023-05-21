@@ -122,7 +122,7 @@
 
             foreach ($selectedHashtags as $selectedHashtag) {
                 $hashtagId = createHashtag($db, $selectedHashtag);
-                createTicketHashtag($db, $ticketId, $hashtagId);
+                createTicketHashtag($db, $ticketId, $hashtagId); 
             }
             
             header("Location: ../pages/tickets.php");

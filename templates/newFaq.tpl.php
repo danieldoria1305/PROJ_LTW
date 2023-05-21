@@ -1,7 +1,9 @@
-<?php function drawNewFaq(Session $session, $question_error = '', $answer_error = '') {
-
+<?php
+function drawNewFaq(Session $session, $question_error = '', $answer_error = '')
+{
     if (!isset($_SESSION['userID'])) {
         header("Location: ../pages/index.php");
+        exit();
     }
     ?>
     

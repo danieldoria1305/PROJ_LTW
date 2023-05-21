@@ -31,7 +31,7 @@
         <head>
             <meta charset="utf-8">
             <title>Ticketly - Edit Ticket</title>
-            <link rel="stylesheet" href="../style/editTicket.css">
+            <link rel="stylesheet" href="../style/editTicket.css"> 
             <script>
             function confirmDelete() {
                 return confirm("Are you sure you want to delete this ticket?");
