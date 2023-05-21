@@ -60,6 +60,10 @@
                 $db = getDatabaseConnection();
                 $ticket = getTicketEditData($db, $ticketId);
 
+                if ($status_id === null) {
+                    $status_id = $ticket->statusId;
+                }
+
                 if ($ticket->title !== $title) {
                     $log = new TicketLogs((int)$ticketId, (int)$ticketId, 'title', $ticket->title, $title);
                     $log->saveLog($db);
@@ -86,13 +90,17 @@
                 }
 
                 updateTicket($db, $ticketId, $title, $description, $answer, $ticket->clientId, $ticket->agentId, $status_id, $priority, $department_id);
-                header("Location: ../pages/client.php");
+                header("Location: ../pages/tickets.php");
                 exit();
             }
 
         } else {
             $db = getDatabaseConnection();
             $ticket = getTicketEditData($db, $ticketId);
+
+            if ($status_id === null) {
+                    $status_id = $ticket->statusId;
+                }
 
             if ($ticket->answer !== $answer && $ticket->answer !== null) {
                 $log = new TicketLogs((int)$ticketId, (int)$ticketId, 'answer', $ticket->answer, $answer);
