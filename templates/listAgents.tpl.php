@@ -11,8 +11,6 @@
         <meta charset="UTF-8">
         <title>Ticketly - Agents' List</title>
         <link rel="stylesheet" href="../style/listClients.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="../javascript/listAgents.js"></script>
         <script>
             function confirmDelete() {
                 return confirm("Are you sure you want to delete this agent?");
@@ -89,6 +87,7 @@
         </main>
 
         <?php include '../templates/footer.tpl.php';?>
+        <script src="../javascript/listAgents.js"></script>
 
     </body>
     </html>
