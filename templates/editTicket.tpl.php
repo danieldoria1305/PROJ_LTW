@@ -81,17 +81,17 @@
                             }
                             ?>
                         </select>
-                        <label for="priority">Priority:</label>
-                        <select id="priority" name="priority">
-                            <?php
-                            $priorities = array('low', 'medium', 'high');
-                            foreach ($priorities as $priority) {
-                                $selected = ($priority === $ticket->priority) ? 'selected' : '';
-                                echo '<option value="' . $priority . '" ' . $selected . '>' . ucfirst($priority) . '</option>';
-                            }
-                            ?>
-                        </select>
                         <?php if ($session->role !== 'client') : ?>
+                            <label for="priority">Priority:</label>
+                            <select id="priority" name="priority">
+                                <?php
+                                $priorities = array('low', 'medium', 'high');
+                                foreach ($priorities as $priority) {
+                                    $selected = ($priority === $ticket->priority) ? 'selected' : '';
+                                    echo '<option value="' . $priority . '" ' . $selected . '>' . ucfirst($priority) . '</option>';
+                                }
+                                ?>
+                            </select>
                             <label for="status">Status:</label>
                             <select id="status" name="status_id">
                                 <?php

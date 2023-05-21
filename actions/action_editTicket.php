@@ -29,7 +29,7 @@
         $answer = isset($_POST["answer"]) ? trim($_POST["answer"]) : null;
         $department_id = isset($_POST["department_id"]) ? (int)$_POST["department_id"] : null;
         $status_id = isset($_POST["status_id"]) ? (int)$_POST["status_id"] : null;
-        $priority = trim($_POST["priority"]);
+        $priority = isset($_POST["priority"]) ? trim($_POST["priority"]) : null;
         $ticketId = isset($_POST['ticket_id']) ? (int)$_POST['ticket_id'] : null;
 
         if ($session->role === 'client') {
@@ -64,6 +64,11 @@
                     $status_id = $ticket->statusId;
                 }
 
+                if ($priority === null) {
+                    $priority = $ticket->priority;
+                }
+                
+
                 if ($ticket->title !== $title) {
                     $log = new TicketLogs((int)$ticketId, (int)$ticketId, 'title', $ticket->title, $title);
                     $log->saveLog($db);
@@ -79,16 +84,6 @@
                     $log->saveLog($db);
                 }
 
-                if ($ticket->statusId !== $status_id) {
-                    $log = new TicketLogs((int)$ticketId, (int)$ticketId, 'status_id', (string)$ticket->statusId, (string)$status_id);
-                    $log->saveLog($db);
-                }
-
-                if ($ticket->priority !== $priority) {
-                    $log = new TicketLogs((int)$ticketId, (int)$ticketId, 'priority', $ticket->priority, $priority);
-                    $log->saveLog($db);
-                }
-
                 updateTicket($db, $ticketId, $title, $description, $answer, $ticket->clientId, $ticket->agentId, $status_id, $priority, $department_id);
                 header("Location: ../pages/tickets.php");
                 exit();
@@ -97,10 +92,6 @@
         } else {
             $db = getDatabaseConnection();
             $ticket = getTicketEditData($db, $ticketId);
-
-            if ($status_id === null) {
-                    $status_id = $ticket->statusId;
-                }
 
             if ($ticket->answer !== $answer && $ticket->answer !== null) {
                 $log = new TicketLogs((int)$ticketId, (int)$ticketId, 'answer', $ticket->answer, $answer);
