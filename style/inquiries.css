@@ -42,6 +42,9 @@ main h2 {
 }
 
 .message-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -49,7 +52,8 @@ main h2 {
 
 .user-message,
 .agent-message {
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .user-message span,

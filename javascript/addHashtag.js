@@ -9,8 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (hashtag !== "") {
             var hashtagElement = document.createElement("span");
             hashtagElement.classList.add("hashtag");
-            hashtagElement.innerHTML =
-              hashtag + '<button class="remove-hashtag" type="button">X</button>';
+            hashtagElement.innerHTML = hashtag + '<button class="remove-hashtag" type="button">X</button>';
             hashtagsContainer.appendChild(hashtagElement);
 
             hashtagsInput.value = "";
