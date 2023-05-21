@@ -227,4 +227,17 @@
         return $stmt->execute();
     }
 
+    function getUserNameById(PDO $db, ?int $id): string {
+        $stmt = $db->prepare('SELECT name FROM users WHERE id = :id');
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return $row['name'];
+        }
+
+        return '';
+    }
+
 ?>

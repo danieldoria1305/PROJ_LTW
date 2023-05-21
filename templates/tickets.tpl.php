@@ -4,13 +4,14 @@
         header("Location: ../pages/index.php");
     }
 
-    require_once __DIR__ . '/../database/tickets.class.php';
-    require_once __DIR__ . '/../database/connection.db.php';
-    require_once __DIR__ . '/../database/departments.class.php';
-    require_once __DIR__ . '/../database/status.class.php';
-    require_once __DIR__ . '/../database/hashtags.class.php';
-    require_once __DIR__ . '/../database/ticketHashtags.class.php';
-    require_once __DIR__ . '/../database/inquiries.class.php';
+    require_once '../database/tickets.class.php';
+    require_once '../database/connection.db.php';
+    require_once '../database/departments.class.php';
+    require_once '../database/status.class.php';
+    require_once '../database/hashtags.class.php';
+    require_once '../database/ticketHashtags.class.php';
+    require_once '../database/inquiries.class.php';
+    require_once '../database/user.class.php';
 
     $clientId = $session->getId();
     $db = getDatabaseConnection();
@@ -169,6 +170,9 @@
                         <?php endif; ?>
                         <span class="ticket-createdAt">Created at: <?= $ticket['created_at'] ?></span>
                         <span class="ticket-updatedAt">Last update at: <?= $ticket['updated_at'] ?></span>
+                        <?php if ($session->role === 'admin') : ?>
+                            <span class="ticket-agen">Assigned to: <?= getUserNameById($db, $ticket['agent_id']) ?></span>
+                        <?php endif; ?>
                     </div>
                     <div class="ticket-details">
                         <p class="ticket-summary"><strong>Description:</strong> <?= nl2br(htmlspecialchars($ticket['description'])) ?></p>

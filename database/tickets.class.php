@@ -33,14 +33,14 @@
         }
     }
 
-    function createTicket(PDO $db, $title, $description, $clientId, $departmentId = null, $priority = 'medium') {
+    function createTicket(PDO $db, $title, $description, $clientId, $departmentId = null) {
         $createdAt = date('Y-m-d H:i:s');
         $updatedAt = $createdAt;
         $stmt = $db->prepare('
-            INSERT INTO tickets (title, description, client_id, department_id, priority, created_at, updated_at) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO tickets (title, description, client_id, department_id, created_at, updated_at) 
+            VALUES (?, ?, ?, ?, ?, ?)
         ');
-        $stmt->execute(array($title, $description, $clientId, $departmentId, $priority, $createdAt, $updatedAt));
+        $stmt->execute(array($title, $description, $clientId, $departmentId, $createdAt, $updatedAt));
         return (int)$db->lastInsertId();
     }
 

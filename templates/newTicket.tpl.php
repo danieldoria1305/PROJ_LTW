@@ -48,12 +48,6 @@ if (!isset($_SESSION['userID'])) {
                         }
                         ?>
                     </select>
-                    <label for="priority">Priority:</label>
-                    <select id="priority" name="priority">
-                        <option value="low">Low</option>
-                        <option value="medium" selected>Medium</option>
-                        <option value="high">High</option>
-                    </select>
                 </div>
                 <button type="submit">Submit</button>
             </form>

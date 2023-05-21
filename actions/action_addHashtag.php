@@ -24,5 +24,4 @@
         }
     }
     drawTickets($session);
-
 ?>
