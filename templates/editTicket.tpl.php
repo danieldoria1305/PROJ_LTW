@@ -44,6 +44,8 @@
                 <a href="../pages/tickets.php" class="back-button"><</a>
                 <h2>Edit Ticket</h2>
                 <form action="../actions/action_editTicket.php?id=<?php echo $ticketId; ?>" method="post">
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
                     <div>
                         <label for="title">Title:</label>
                         <?php if ($session->role === 'client') : ?>
