@@ -16,7 +16,9 @@
     $clientId = $session->getId();
     $db = getDatabaseConnection();
 
-    if ($session->role === 'admin'){
+    $view = isset($_GET['view']) && $session->role === 'agent' ? $_GET['view'] : '';
+
+    if ($view === 'all' || $session->role === 'admin'){
         $stmt = $db->prepare('SELECT * FROM tickets');
         $stmt->execute();
         $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -127,6 +129,13 @@
             <?php if ($session->role === 'client') : ?>
                 <a href="newTicket.php" class="new-ticket-button">Create new ticket</a>
             <?php endif; ?>
+            <?php if ($session->role === 'agent') : ?>
+                <?php if ($view === 'all') : ?>
+                    <a href="?view=" class="new-ticket-button">View my tickets</a>
+                <?php else : ?>
+                    <a href="?view=all" class="new-ticket-button">View all tickets</a>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
         <div class="ticket-container">
             <?php foreach ($tickets as $ticket) { ?>
@@ -170,8 +179,11 @@
                         <?php endif; ?>
                         <span class="ticket-createdAt">Created at: <?= $ticket['created_at'] ?></span>
                         <span class="ticket-updatedAt">Last update at: <?= $ticket['updated_at'] ?></span>
+                        <?php if ($session->role !== 'client') : ?>
+                            <span class="ticket-client">Client: <?= getUserNameById($db, $ticket['client_id']) ?></span>
+                        <?php endif; ?>
                         <?php if ($session->role === 'admin') : ?>
-                            <span class="ticket-agen">Assigned to: <?= getUserNameById($db, $ticket['agent_id']) ?></span>
+                            <span class="ticket-agent">Assigned to: <?= getUserNameById($db, $ticket['agent_id']) ?></span>
                         <?php endif; ?>
                     </div>
                     <div class="ticket-details">
