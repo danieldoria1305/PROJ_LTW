@@ -15,3 +15,5 @@ cd project-ltw02g07
 git checkout final-delivery-v1
 php -S localhost:9000
 ```
+
+After this open http://localhost:9000/pages/index.php on your browser and you are good to go!
